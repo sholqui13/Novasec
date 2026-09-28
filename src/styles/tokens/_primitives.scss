@@ -1,0 +1,22 @@
+:root {
+  --nvs-brand-primary: #0b1f2d;
+  --nvs-brand-secondary: #1ec8c8;
+  --nvs-brand-accent: #f5a623;
+
+  --nvs-neutral-0: #ffffff;
+  --nvs-neutral-50: #f8fafc;
+  --nvs-neutral-100: #f1f5f9;
+  --nvs-neutral-200: #e2e8f0;
+  --nvs-neutral-300: #cbd5e1;
+  --nvs-neutral-400: #94a3b8;
+  --nvs-neutral-500: #64748b;
+  --nvs-neutral-600: #4b5563;
+  --nvs-neutral-700: #374151;
+  --nvs-neutral-800: #2d3748;
+  --nvs-neutral-900: #1f2937;
+
+  --nvs-semantic-success: #10b981;
+  --nvs-semantic-warning: var(--nvs-brand-accent);
+  --nvs-semantic-error: #ef4444;
+  --nvs-semantic-info: var(--nvs-brand-secondary);
+}

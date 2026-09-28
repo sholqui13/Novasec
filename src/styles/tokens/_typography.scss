@@ -1,0 +1,40 @@
+:root {
+  --nvs-font-family-sans: 'Nunito', sans-serif;
+  --nvs-font-size-micro-xs: 0.5625rem;
+  --nvs-font-size-micro: 0.625rem;
+  --nvs-font-size-compact-caption: 0.6875rem;
+  --nvs-font-size-caption: 0.75rem;
+  --nvs-font-size-label: 0.8125rem;
+  --nvs-font-size-small: 0.875rem;
+  --nvs-font-size-compact-body: 0.9375rem;
+  --nvs-font-size-body: 1rem;
+  --nvs-font-size-body-lg: 1.0625rem;
+  --nvs-font-size-subtitle: 1.125rem;
+  --nvs-font-size-h3: 1.25rem;
+  --nvs-font-size-h3-lg: 1.375rem;
+  --nvs-font-size-title: 1.5rem;
+  --nvs-font-size-h2: 1.75rem;
+  --nvs-font-size-h2-lg: 1.875rem;
+  --nvs-font-size-h1: 2.25rem;
+  --nvs-font-size-display-sm: 2.75rem;
+  --nvs-font-size-display: 3rem;
+
+  --nvs-font-size-xs: var(--nvs-font-size-caption);
+  --nvs-font-size-sm: var(--nvs-font-size-small);
+  --nvs-font-size-md: var(--nvs-font-size-body);
+  --nvs-font-size-lg: var(--nvs-font-size-subtitle);
+  --nvs-button-font-size-small: var(--nvs-font-size-small);
+  --nvs-button-font-size-medium: var(--nvs-font-size-small);
+  --nvs-button-font-size-large: var(--nvs-font-size-body);
+
+  --nvs-font-weight-regular: 400;
+  --nvs-font-weight-medium: 500;
+  --nvs-font-weight-semibold: 600;
+  --nvs-font-weight-bold: 700;
+  --nvs-font-weight-extrabold: 800;
+
+  --nvs-line-height-tight: 1;
+  --nvs-line-height-normal: 1.2;
+  --nvs-line-height-relaxed: 1.5;
+  --nvs-line-height-compact: var(--nvs-line-height-tight);
+}

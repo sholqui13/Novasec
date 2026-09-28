@@ -1,0 +1,24 @@
+:root {
+  --nvs-border-default: 1px solid var(--nvs-color-border);
+  --nvs-border-strong: 1px solid var(--nvs-color-border-strong);
+  --nvs-border-focus: 1px solid var(--nvs-color-focus);
+  --nvs-border-error: 1px solid var(--nvs-color-error);
+  --nvs-focus-outline-offset: 2px;
+  --nvs-shadow-border-focus: 0 0 0 3px rgb(30 200 200 / 20%);
+  --nvs-shadow-border-error: 0 0 0 3px rgb(239 68 68 / 15%);
+
+  --nvs-shadow-xs: 0 1px 2px 0 rgb(11 31 45 / 6%);
+  --nvs-shadow-sm: 0 2px 4px 0 rgb(11 31 45 / 8%);
+  --nvs-shadow-md: 0 4px 12px 0 rgb(11 31 45 / 10%);
+  --nvs-shadow-lg: 0 8px 24px 0 rgb(11 31 45 / 12%);
+  --nvs-shadow-xl: 0 16px 40px 0 rgb(11 31 45 / 16%);
+  --nvs-shadow-focus: 0 0 0 3px rgb(30 200 200 / 25%);
+  --nvs-motion-fast: 150ms;
+  --nvs-motion-spin-duration: 900ms;
+  --nvs-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+}
+
+:root[data-theme='dark'] {
+  --nvs-border-default: 1px solid var(--nvs-color-border);
+  --nvs-border-strong: 1px solid var(--nvs-color-border-strong);
+}

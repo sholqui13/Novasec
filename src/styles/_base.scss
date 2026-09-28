@@ -1,0 +1,80 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: var(--nvs-layout-min-viewport-width);
+  min-height: 100%;
+  background: var(--nvs-color-background);
+  color: var(--nvs-color-text);
+  font-family: var(--nvs-font-family-sans);
+  font-size: 100%;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-width: var(--nvs-layout-min-viewport-width);
+  min-height: var(--nvs-layout-viewport-min-height);
+  margin: 0;
+  background: var(--nvs-color-background);
+  color: var(--nvs-color-text);
+  font-size: var(--nvs-font-size-md);
+  font-weight: var(--nvs-font-weight-regular);
+  line-height: var(--nvs-line-height-relaxed);
+}
+
+button,
+input,
+textarea,
+select {
+  color: inherit;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: var(--nvs-border-width-medium) solid var(--nvs-color-focus);
+  outline-offset: var(--nvs-focus-outline-offset);
+  box-shadow: var(--nvs-shadow-border-focus);
+}
+
+::selection {
+  background: var(--nvs-color-accent-subtle);
+  color: var(--nvs-color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
