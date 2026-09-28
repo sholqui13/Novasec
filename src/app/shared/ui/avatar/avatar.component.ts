@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 
 export type AvatarSize = 'small' | 'medium' | 'large';
+export type AvatarVariant = 'brand' | 'dark';
 
 /**
  * Avatar circular con imagen o iniciales. Si la imagen falla, muestra las iniciales.
@@ -24,7 +25,7 @@ export type AvatarSize = 'small' | 'medium' | 'large';
   styleUrl: './avatar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class]': '"nvs-avatar nvs-avatar--" + size()',
+    '[class]': '"nvs-avatar nvs-avatar--" + size() + " nvs-avatar--" + variant()',
     '[attr.role]': 'name() ? "img" : null',
     '[attr.aria-label]': 'name() || null',
     '[attr.aria-hidden]': 'name() ? null : "true"',
@@ -32,6 +33,7 @@ export type AvatarSize = 'small' | 'medium' | 'large';
 })
 export class AvatarComponent {
   readonly size = input<AvatarSize>('medium');
+  readonly variant = input<AvatarVariant>('brand');
   readonly initials = input('');
   readonly imageUrl = input<string | null | undefined>(null);
   /** Nombre de la persona, para lectores de pantalla. */

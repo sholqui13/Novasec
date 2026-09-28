@@ -1,0 +1,16 @@
+:root {
+  --nvs-color-map-marker-fill: var(--nvs-brand-primary);
+  --nvs-color-map-marker-stroke: var(--nvs-brand-secondary);
+  --nvs-color-map-marker-dot: var(--nvs-brand-secondary);
+  --nvs-color-map-marker-dot-hover: var(--nvs-brand-accent);
+  --nvs-color-map-marker-selected-fill: var(--nvs-brand-secondary);
+  --nvs-color-map-marker-selected-stroke: var(--nvs-brand-primary);
+  --nvs-color-map-marker-selected-dot: var(--nvs-brand-primary);
+  --nvs-color-map-marker-halo: color-mix(in srgb, var(--nvs-brand-secondary) 45%, transparent);
+  --nvs-color-map-marker-label-background: var(--nvs-color-surface);
+  --nvs-color-map-marker-label-text: var(--nvs-color-text);
+
+  --nvs-color-map-cluster-background: var(--nvs-brand-primary);
+  --nvs-color-map-cluster-ring: color-mix(in srgb, var(--nvs-neutral-500) 45%, transparent);
+  --nvs-color-map-cluster-text: var(--nvs-brand-secondary);
+}

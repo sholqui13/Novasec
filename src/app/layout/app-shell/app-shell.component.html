@@ -5,7 +5,7 @@
 <nvs-sidebar
   id="app-shell-sidebar"
   class="app-shell__sidebar"
-  [sections]="navSections"
+  [sections]="navSections()"
   [user]="user()"
   [collapsed]="!isMobile() && sidebarCollapsed()"
   [drawer]="isMobile()"

@@ -1,0 +1,36 @@
+@let item = caseData();
+
+<div class="nvs-case-card__top">
+  <span class="nvs-case-card__number">#{{ item.number }}</span>
+  <nvs-case-status-badge class="nvs-case-card__status" [status]="item.status" />
+</div>
+
+<h3 class="nvs-case-card__title">
+  <button
+    type="button"
+    class="nvs-case-card__trigger"
+    [attr.aria-pressed]="active()"
+    (click)="activate()"
+  >
+    {{ item.title }}
+  </button>
+</h3>
+
+@if (density() === 'comfortable') {
+  <p class="nvs-case-card__description">{{ item.description }}</p>
+
+  <div class="nvs-case-card__footer">
+    <span class="nvs-case-card__location">
+      <nvs-icon name="map-pin" size="xs" />
+      {{ item.location }}
+    </span>
+
+    @if (item.assignee; as assignee) {
+      <span class="nvs-case-card__assignee">
+        <nvs-avatar size="small" variant="dark" [initials]="assignee.initials" />
+        <span class="nvs-case-card__sr-only">Asignado a</span>
+        {{ assigneeFirstName() }}
+      </span>
+    }
+  </div>
+}

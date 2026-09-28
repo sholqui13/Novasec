@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { AuthService } from '@core/auth';
 import { BreakpointService, type Viewport } from '@core/services';
+import type { Case } from '@features/cases/models';
+import { CasesService, FAKE_CASES } from '@features/cases/services';
 import { AppShellComponent } from './app-shell.component';
 
 @Component({ template: '<p class="page">Contenido</p>' })
@@ -13,6 +15,8 @@ describe('AppShellComponent', () => {
   let host: HTMLElement;
   const viewport = signal<Viewport>('desktop');
   const logout = vi.fn();
+  const activeCases = signal<readonly Case[]>([]);
+  const loadCases = vi.fn();
 
   beforeAll(() => {
     const proto = HTMLDialogElement.prototype;
@@ -28,6 +32,8 @@ describe('AppShellComponent', () => {
   beforeEach(async () => {
     viewport.set('desktop');
     logout.mockReset();
+    loadCases.mockReset();
+    activeCases.set([]);
 
     await TestBed.configureTestingModule({
       imports: [AppShellComponent],
@@ -39,6 +45,7 @@ describe('AppShellComponent', () => {
         ]),
         { provide: AuthService, useValue: { user: signal(null), logout } },
         { provide: BreakpointService, useValue: { viewport } },
+        { provide: CasesService, useValue: { activeCases, load: loadCases } },
       ],
     }).compileComponents();
 
@@ -148,6 +155,18 @@ describe('AppShellComponent', () => {
     fixture.detectChanges();
 
     expect(query('nvs-header h1').textContent).toBe('Casos');
+  });
+
+  it('loads the cases and shows the active count on the Cases item', () => {
+    const casesBadge = () =>
+      host.querySelector('a[href="/cases"] .nvs-sidebar__badge')?.textContent?.trim();
+    expect(loadCases).toHaveBeenCalledOnce();
+    expect(casesBadge()).toBeUndefined();
+
+    activeCases.set(FAKE_CASES.slice(0, 3));
+    fixture.detectChanges();
+
+    expect(casesBadge()).toBe('3');
   });
 
   it('asks for confirmation before logging out', async () => {

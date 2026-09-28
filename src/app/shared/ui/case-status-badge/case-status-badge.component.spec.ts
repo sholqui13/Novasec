@@ -30,9 +30,9 @@ describe('CaseStatusBadgeComponent', () => {
 
   it('allows overriding the label', () => {
     fixture.componentRef.setInput('status', 'in-progress');
-    fixture.componentRef.setInput('label', 'En progreso');
+    fixture.componentRef.setInput('label', 'En curso');
     fixture.detectChanges();
 
-    expect(host.textContent?.trim()).toBe('En progreso');
+    expect(host.textContent?.trim()).toBe('En curso');
   });
 });

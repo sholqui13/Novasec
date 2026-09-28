@@ -1,0 +1,39 @@
+@let item = caseData();
+
+<section class="nvs-case-information" [attr.aria-labelledby]="titleId">
+  <h2 class="nvs-case-information__title" [id]="titleId">Información del caso</h2>
+
+  <dl class="nvs-case-information__list">
+    <div class="nvs-case-information__row">
+      <dt>Número de caso</dt>
+      <dd>#{{ item.number }}</dd>
+    </div>
+
+    <div class="nvs-case-information__row">
+      <dt>Estado</dt>
+      <dd><nvs-case-status-badge [status]="item.status" /></dd>
+    </div>
+
+    <div class="nvs-case-information__row">
+      <dt>Prioridad</dt>
+      <dd>{{ priorityLabel() }}</dd>
+    </div>
+
+    <div class="nvs-case-information__row">
+      <dt>Responsable</dt>
+      <dd>{{ item.assignee?.name ?? 'Sin asignar' }}</dd>
+    </div>
+
+    <div class="nvs-case-information__row">
+      <dt>Ubicación</dt>
+      <dd>{{ item.location }}</dd>
+    </div>
+
+    <div class="nvs-case-information__row">
+      <dt>Apertura</dt>
+      <dd>
+        <time [attr.datetime]="item.reportedAt">{{ item.reportedAt | date: 'd MMM y · HH:mm' }}</time>
+      </dd>
+    </div>
+  </dl>
+</section>

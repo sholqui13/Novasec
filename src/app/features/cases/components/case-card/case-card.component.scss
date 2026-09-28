@@ -1,0 +1,127 @@
+@use 'mixins/button';
+@use 'mixins/typography' as type;
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--nvs-space-2);
+  padding: var(--nvs-space-4);
+  border: var(--nvs-border-width-default) solid var(--nvs-color-case-card-border);
+  border-radius: var(--nvs-radius-xl);
+  background: var(--nvs-color-case-card-background);
+  font-family: var(--nvs-font-family-sans);
+  @include button.interactive-transition;
+
+  &:hover {
+    border-color: var(--nvs-color-case-card-border-hover);
+    box-shadow: var(--nvs-shadow-sm);
+  }
+
+  &:has(.nvs-case-card__trigger:focus-visible) {
+    outline: var(--nvs-border-width-focus) solid var(--nvs-color-focus);
+    outline-offset: var(--nvs-focus-outline-offset);
+  }
+}
+
+:host(.nvs-case-card--active) {
+  border-color: var(--nvs-color-case-card-border-active);
+
+  &:hover {
+    border-color: var(--nvs-color-case-card-border-active);
+  }
+}
+
+.nvs-case-card__top {
+  display: flex;
+  align-items: center;
+  gap: var(--nvs-space-2);
+}
+
+.nvs-case-card__number {
+  color: var(--nvs-color-case-card-text);
+  font-size: var(--nvs-font-size-caption);
+  font-weight: var(--nvs-font-weight-medium);
+}
+
+.nvs-case-card__status {
+  margin-inline-start: auto;
+}
+
+.nvs-case-card__title {
+  margin: 0;
+  color: var(--nvs-color-case-card-title);
+  font-size: var(--nvs-font-size-small);
+  font-weight: var(--nvs-font-weight-semibold);
+  line-height: var(--nvs-line-height-normal);
+}
+
+// El botón del título se estira sobre toda la tarjeta para hacerla clicable.
+.nvs-case-card__trigger {
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: none;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.nvs-case-card__description {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--nvs-color-case-card-text);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  @include type.small;
+}
+
+.nvs-case-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--nvs-space-3);
+  padding-top: var(--nvs-space-3);
+  border-top: var(--nvs-border-default);
+  color: var(--nvs-color-case-card-text);
+  font-size: var(--nvs-font-size-caption);
+}
+
+.nvs-case-card__location,
+.nvs-case-card__assignee {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nvs-space-2);
+  min-width: 0;
+}
+
+.nvs-case-card__location {
+  gap: var(--nvs-space-1);
+}
+
+.nvs-case-card__sr-only {
+  @include sr-only;
+}

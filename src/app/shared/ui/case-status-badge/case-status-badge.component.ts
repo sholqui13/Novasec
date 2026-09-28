@@ -8,11 +8,11 @@ interface CaseStatusConfig {
 }
 
 export const CASE_STATUS_CONFIG: Readonly<Record<CaseStatus, CaseStatusConfig>> = {
-  open: { label: 'Open', variant: 'info' },
-  'in-progress': { label: 'In Progress', variant: 'warning' },
-  resolved: { label: 'Resolved', variant: 'success' },
-  closed: { label: 'Closed', variant: 'dark' },
-  urgent: { label: 'Urgent', variant: 'error' },
+  open: { label: 'Abierto', variant: 'info' },
+  'in-progress': { label: 'En progreso', variant: 'warning' },
+  resolved: { label: 'Resuelto', variant: 'success' },
+  closed: { label: 'Cerrado', variant: 'dark' },
+  urgent: { label: 'Urgente', variant: 'error' },
 };
 
 @Component({

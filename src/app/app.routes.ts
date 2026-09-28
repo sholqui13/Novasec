@@ -21,7 +21,7 @@ export const routes: Routes = [
         title: 'Dashboard · Novasec',
         data: { pageTitle: 'Dashboard' },
         loadComponent: () =>
-          import('./features/pages/home/home-page.component').then((m) => m.HomePageComponent),
+          import('./features/pages/dashboard').then((m) => m.DashboardPageComponent),
       },
     ],
   },

@@ -1,0 +1,22 @@
+.nvs-cases-map {
+  display: block;
+  // Contiene los z-index internos de Leaflet (400–1000) para que no pasen sobre el header.
+  isolation: isolate;
+}
+
+.nvs-cases-map__container {
+  width: 100%;
+  height: 100%;
+  background: var(--nvs-neutral-300);
+  font-family: var(--nvs-font-family-sans);
+}
+
+// Leaflet posiciona este elemento en la coordenada; el pin se sube para que su punta quede ahí.
+.nvs-cases-map__marker {
+  overflow: visible;
+
+  > nvs-map-marker {
+    position: absolute;
+    transform: translate(-50%, calc(var(--nvs-map-marker-tip-offset) * -1));
+  }
+}

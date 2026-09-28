@@ -1,0 +1,103 @@
+@use 'mixins/typography' as type;
+@use 'functions' as *;
+
+$detail-icon-size: calculate-rem(30px);
+
+:host {
+  display: block;
+  font-family: var(--nvs-font-family-sans);
+}
+
+.nvs-case-panel__case {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nvs-space-5);
+  padding: var(--nvs-space-6);
+  border-radius: var(--nvs-radius-lg);
+  background: var(--nvs-color-case-panel-background);
+}
+
+.nvs-case-panel__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--nvs-space-3);
+}
+
+.nvs-case-panel__eyebrow,
+.nvs-case-panel__label {
+  margin: 0;
+  color: var(--nvs-color-case-panel-label);
+  font-size: var(--nvs-font-size-caption);
+  font-weight: var(--nvs-font-weight-semibold);
+  letter-spacing: 0.06em;
+  line-height: var(--nvs-line-height-normal);
+  text-transform: uppercase;
+}
+
+.nvs-case-panel__title {
+  margin: var(--nvs-space-1) 0 0;
+  color: var(--nvs-color-case-panel-text);
+  @include type.text-style(h3, bold, normal);
+}
+
+.nvs-case-panel__summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nvs-space-2);
+  padding: var(--nvs-space-4);
+  border: var(--nvs-border-width-default) solid var(--nvs-color-case-panel-summary-border);
+  border-radius: var(--nvs-radius-xl);
+}
+
+.nvs-case-panel__summary-number,
+.nvs-case-panel__summary-title {
+  margin: 0;
+  line-height: var(--nvs-line-height-normal);
+}
+
+.nvs-case-panel__summary-number {
+  color: var(--nvs-color-case-panel-label);
+  font-size: var(--nvs-font-size-caption);
+}
+
+.nvs-case-panel__summary-title {
+  color: var(--nvs-color-case-panel-text);
+  font-size: var(--nvs-font-size-small);
+  font-weight: var(--nvs-font-weight-medium);
+}
+
+.nvs-case-panel__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nvs-space-4);
+  margin: 0;
+}
+
+.nvs-case-panel__detail {
+  display: flex;
+  align-items: start;
+  gap: var(--nvs-space-3);
+}
+
+.nvs-case-panel__detail-icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: $detail-icon-size;
+  height: $detail-icon-size;
+  border-radius: var(--nvs-radius-md);
+  color: var(--nvs-color-case-panel-icon);
+  background: var(--nvs-color-case-panel-icon-background);
+}
+
+.nvs-case-panel__value {
+  margin: var(--nvs-space-1) 0 0;
+  color: var(--nvs-color-case-panel-text);
+  @include type.small;
+}
+
+.nvs-case-panel__action {
+  width: 100%;
+}

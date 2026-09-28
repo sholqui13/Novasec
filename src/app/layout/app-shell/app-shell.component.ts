@@ -14,10 +14,11 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { AuthService, LOGIN_PATH } from '@core/auth';
 import { BreakpointService, SystemStatusService } from '@core/services';
+import { CasesService } from '@features/cases/services';
 import { ModalComponent } from '@shared/ui/modal';
 import { HeaderComponent } from '../header';
 import { SidebarComponent } from '../sidebar';
-import { NAV_SECTIONS } from './navigation';
+import { CASES_PATH, NAV_SECTIONS } from './navigation';
 
 @Component({
   selector: 'nvs-app-shell',
@@ -37,8 +38,17 @@ export class AppShellComponent {
   private readonly router = inject(Router);
   private readonly auth = inject(AuthService);
   private readonly injector = inject(Injector);
+  private readonly cases = inject(CasesService);
 
-  protected readonly navSections = NAV_SECTIONS;
+  protected readonly navSections = computed(() => {
+    const activeCases = this.cases.activeCases().length;
+    return NAV_SECTIONS.map((section) => ({
+      ...section,
+      items: section.items.map((item) =>
+        item.path === CASES_PATH ? { ...item, badge: activeCases || undefined } : item,
+      ),
+    }));
+  });
   protected readonly user = this.auth.user;
   protected readonly systemStatus = inject(SystemStatusService).status;
   private readonly viewport = inject(BreakpointService).viewport;
@@ -63,6 +73,7 @@ export class AppShellComponent {
 
   constructor() {
     this.navigationEnd$.subscribe(() => this.closeMobileNav());
+    void this.cases.load();
   }
 
   toggleMobileNav(): void {

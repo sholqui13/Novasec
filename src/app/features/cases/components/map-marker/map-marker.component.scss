@@ -1,0 +1,121 @@
+@use 'sass:math';
+@use 'functions' as *;
+
+$pin-size: calculate-rem(36px);
+$pin-stroke-width: 2px;
+$pin-dot-size: calculate-rem(12px);
+$selected-scale: 1.15;
+$halo-size: calculate-rem(4px);
+$pin-tip-overflow: math.div($pin-size * (math.sqrt(2) - 1), 2);
+$cluster-size: calculate-rem(36px);
+$cluster-ring-width: calculate-rem(6px);
+
+:host {
+  --nvs-map-marker-tip-offset: #{$pin-size + $pin-tip-overflow};
+
+  display: inline-flex;
+  font-family: var(--nvs-font-family-sans);
+
+  --nvs-map-marker-fill: var(--nvs-color-map-marker-fill);
+  --nvs-map-marker-stroke: var(--nvs-color-map-marker-stroke);
+  --nvs-map-marker-dot: var(--nvs-color-map-marker-dot);
+}
+
+:host(.nvs-map-marker--hover),
+:host(:not(.nvs-map-marker--selected)) .nvs-map-marker__button:is(:hover, :focus-visible) {
+  --nvs-map-marker-dot: var(--nvs-color-map-marker-dot-hover);
+}
+
+:host(.nvs-map-marker--selected) {
+  --nvs-map-marker-fill: var(--nvs-color-map-marker-selected-fill);
+  --nvs-map-marker-stroke: var(--nvs-color-map-marker-selected-stroke);
+  --nvs-map-marker-dot: var(--nvs-color-map-marker-selected-dot);
+}
+
+.nvs-map-marker__button,
+.nvs-map-marker__cluster {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: var(--nvs-border-width-focus) solid var(--nvs-color-focus);
+    outline-offset: var(--nvs-focus-outline-offset);
+  }
+}
+
+// Marcador
+
+.nvs-map-marker__button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: var(--nvs-radius-md);
+}
+
+.nvs-map-marker__pin {
+  display: block;
+  width: $pin-size;
+  height: $pin-size + $pin-tip-overflow;
+  transform-origin: 50% 100%;
+  transition: transform var(--nvs-motion-fast) var(--nvs-motion-easing-standard);
+
+  :host(.nvs-map-marker--selected) & {
+    transform: scale($selected-scale);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.nvs-map-marker__shape {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $pin-size;
+  height: $pin-size;
+  border: $pin-stroke-width solid var(--nvs-map-marker-stroke);
+  border-radius: 50% 50% 50% 0;
+  background: var(--nvs-map-marker-fill);
+  box-shadow: 0 0 $halo-size var(--nvs-color-map-marker-halo);
+  transform: rotate(-45deg);
+}
+
+.nvs-map-marker__dot {
+  width: $pin-dot-size;
+  height: $pin-dot-size;
+  border-radius: var(--nvs-radius-full);
+  background: var(--nvs-map-marker-dot);
+  transition: background-color var(--nvs-motion-fast) var(--nvs-motion-easing-standard);
+}
+
+.nvs-map-marker__label {
+  padding: var(--nvs-space-1) var(--nvs-space-2);
+  border-radius: var(--nvs-radius-sm);
+  color: var(--nvs-color-map-marker-label-text);
+  background: var(--nvs-color-map-marker-label-background);
+  box-shadow: var(--nvs-shadow-sm);
+  font-size: var(--nvs-font-size-caption);
+  font-weight: var(--nvs-font-weight-medium);
+  line-height: var(--nvs-line-height-normal);
+  white-space: nowrap;
+}
+
+// Cluster
+
+.nvs-map-marker__cluster {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $cluster-size;
+  height: $cluster-size;
+  border-radius: var(--nvs-radius-full);
+  color: var(--nvs-color-map-cluster-text);
+  background: var(--nvs-color-map-cluster-background);
+  box-shadow: 0 0 0 $cluster-ring-width var(--nvs-color-map-cluster-ring);
+  font-size: var(--nvs-font-size-small);
+  font-weight: var(--nvs-font-weight-bold);
+}

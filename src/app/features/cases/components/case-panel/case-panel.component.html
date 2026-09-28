@@ -1,0 +1,63 @@
+@if (loading()) {
+  <nvs-feedback-state state="loading" title="Cargando caso..." message="Obteniendo datos del servidor" />
+} @else if (error()) {
+  <nvs-feedback-state
+    state="error"
+    title="No se pudo cargar"
+    message="Error de conexión"
+    actionLabel="Reintentar"
+    (action)="retry.emit()"
+  />
+} @else if (caseData(); as item) {
+  <article class="nvs-case-panel__case" [attr.aria-labelledby]="titleId">
+    <header class="nvs-case-panel__header">
+      <div>
+        <p class="nvs-case-panel__eyebrow">Caso seleccionado</p>
+        <h2 class="nvs-case-panel__title" [id]="titleId">Caso #{{ item.number }}</h2>
+      </div>
+      <nvs-case-status-badge [status]="item.status" />
+    </header>
+
+    <div class="nvs-case-panel__summary">
+      <p class="nvs-case-panel__summary-number">#{{ item.number }}</p>
+      <p class="nvs-case-panel__summary-title">{{ item.title }}</p>
+    </div>
+
+    <dl class="nvs-case-panel__details">
+      <div class="nvs-case-panel__detail">
+        <span class="nvs-case-panel__detail-icon" aria-hidden="true">
+          <nvs-icon name="map-pin" size="small" />
+        </span>
+        <div>
+          <dt class="nvs-case-panel__label">Ubicación</dt>
+          <dd class="nvs-case-panel__value">{{ item.location }}</dd>
+        </div>
+      </div>
+
+      <div class="nvs-case-panel__detail">
+        <span class="nvs-case-panel__detail-icon" aria-hidden="true">
+          <nvs-icon name="clock" size="small" />
+        </span>
+        <div>
+          <dt class="nvs-case-panel__label">Fecha y hora</dt>
+          <dd class="nvs-case-panel__value">
+            <time [attr.datetime]="item.reportedAt">
+              {{ item.reportedAt | date: 'd MMM y · HH:mm' }}
+            </time>
+          </dd>
+        </div>
+      </div>
+    </dl>
+
+    <section class="nvs-case-panel__description">
+      <h3 class="nvs-case-panel__label">Descripción del incidente</h3>
+      <p class="nvs-case-panel__value">{{ item.description }}</p>
+    </section>
+
+    <button nvsButton class="nvs-case-panel__action" (clicked)="viewDetails.emit(item)">
+      Ver detalle del caso
+    </button>
+  </article>
+} @else {
+  <nvs-feedback-state state="empty" [title]="emptyTitle()" [message]="emptyMessage()" />
+}

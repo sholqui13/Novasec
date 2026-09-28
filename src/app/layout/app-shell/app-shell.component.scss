@@ -122,7 +122,8 @@ html:has(.app-shell--nav-open) {
 // Header: en mobile sus dos filas (barra y contexto) se ubican en la grilla por separado,
 // para que solo la barra quede fija arriba.
 
-.app-shell__header {
+// Doble clase para ganarle al `:host { display: block }` del propio header.
+.app-shell .app-shell__header {
   position: sticky;
   top: 0;
   z-index: var(--nvs-z-header);

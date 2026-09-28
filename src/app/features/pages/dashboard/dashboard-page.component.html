@@ -1,0 +1,31 @@
+<div class="dashboard">
+  <section class="dashboard__map" aria-label="Mapa de casos activos">
+    <nvs-cases-map
+      class="dashboard__map-canvas"
+      [imageUrl]="mapImageUrl"
+      [cases]="cases.activeCases()"
+      [selectedId]="cases.selectedCase()?.id ?? null"
+      (selected)="cases.select($event.id)"
+    />
+
+    <p class="dashboard__chip dashboard__chip--status">
+      <span class="dashboard__status-dot" aria-hidden="true"></span>
+      <span>{{ cases.activeCases().length }} casos activos</span>
+      @if (cases.lastUpdated(); as updated) {
+        <span class="dashboard__updated">Actualizado {{ updated | date: 'HH:mm' }}</span>
+      }
+    </p>
+  </section>
+
+  <aside class="dashboard__panel" aria-label="Detalle del caso">
+    <nvs-case-panel
+      [case]="cases.selectedCase()"
+      [loading]="cases.loading()"
+      [error]="cases.error()"
+      emptyTitle="Selecciona un caso"
+      emptyMessage="Haz clic en un marcador del mapa"
+      (retry)="cases.load()"
+      (viewDetails)="viewDetails($event)"
+    />
+  </aside>
+</div>

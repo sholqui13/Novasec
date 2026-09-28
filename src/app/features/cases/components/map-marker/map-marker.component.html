@@ -1,0 +1,24 @@
+@if (isCluster()) {
+  <button
+    type="button"
+    class="nvs-map-marker__cluster"
+    [attr.aria-label]="clusterCount() + ' casos en esta zona'"
+    (click)="selected.emit(caseId())"
+  >
+    {{ clusterCount() }}
+  </button>
+} @else {
+  <button
+    type="button"
+    class="nvs-map-marker__button"
+    [attr.aria-pressed]="state() === 'selected'"
+    (click)="selected.emit(caseId())"
+  >
+    <span class="nvs-map-marker__pin" aria-hidden="true">
+      <span class="nvs-map-marker__shape">
+        <span class="nvs-map-marker__dot"></span>
+      </span>
+    </span>
+    <span class="nvs-map-marker__label">Caso #{{ caseId() }}</span>
+  </button>
+}

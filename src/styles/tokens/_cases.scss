@@ -1,0 +1,22 @@
+:root {
+  --nvs-color-case-card-background: var(--nvs-color-surface);
+  --nvs-color-case-card-border: var(--nvs-color-border);
+  --nvs-color-case-card-border-hover: var(--nvs-color-border-strong);
+  --nvs-color-case-card-border-active: var(--nvs-color-focus);
+  --nvs-color-case-card-title: var(--nvs-color-text);
+  --nvs-color-case-card-text: var(--nvs-color-text-muted);
+
+  --nvs-color-case-panel-background: var(--nvs-color-surface);
+  --nvs-color-case-panel-border: var(--nvs-color-border);
+  --nvs-color-case-panel-summary-border: var(--nvs-color-focus);
+  --nvs-color-case-panel-label: var(--nvs-color-text-muted);
+  --nvs-color-case-panel-text: var(--nvs-color-text);
+  --nvs-color-case-panel-icon: var(--nvs-color-text);
+  --nvs-color-case-panel-icon-background: var(--nvs-color-info-subtle);
+
+  --nvs-color-case-info-background: var(--nvs-color-surface);
+  --nvs-color-case-info-header-background: var(--nvs-color-surface-muted);
+  --nvs-color-case-info-border: var(--nvs-color-border);
+  --nvs-color-case-info-label: var(--nvs-color-text-muted);
+  --nvs-color-case-info-value: var(--nvs-color-text);
+}
