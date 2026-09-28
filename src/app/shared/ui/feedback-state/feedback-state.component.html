@@ -1,0 +1,20 @@
+@if (resolvedIcon(); as icon) {
+  <span class="nvs-feedback-state__icon" aria-hidden="true">
+    <nvs-icon class="nvs-feedback-state__glyph" [name]="icon" />
+  </span>
+} @else {
+  <span class="nvs-feedback-state__spinner" aria-hidden="true"></span>
+}
+
+@if (title()) {
+  <p class="nvs-feedback-state__title">{{ title() }}</p>
+}
+@if (message()) {
+  <p class="nvs-feedback-state__message">{{ message() }}</p>
+}
+
+@if (actionLabel()) {
+  <button nvsButton variant="secondary" size="small" class="nvs-feedback-state__action" (clicked)="action.emit()">
+    {{ actionLabel() }}
+  </button>
+}

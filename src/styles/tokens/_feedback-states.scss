@@ -1,0 +1,16 @@
+:root {
+  --nvs-color-feedback-state-background: var(--nvs-color-surface);
+  --nvs-color-feedback-state-border: var(--nvs-color-border);
+  --nvs-color-feedback-state-title: var(--nvs-color-text);
+  --nvs-color-feedback-state-message: var(--nvs-color-text-muted);
+
+  --nvs-color-feedback-state-spinner-track: var(--nvs-color-border);
+  --nvs-color-feedback-state-spinner-arc: var(--nvs-color-info);
+
+  --nvs-color-feedback-state-empty-icon: var(--nvs-color-text-muted);
+  --nvs-color-feedback-state-empty-icon-background: var(--nvs-color-surface-muted);
+
+  --nvs-color-feedback-state-error-icon: var(--nvs-color-error);
+  --nvs-color-feedback-state-error-icon-background: var(--nvs-color-error-subtle);
+  --nvs-color-feedback-state-error-border: rgb(239 68 68 / 20%);
+}

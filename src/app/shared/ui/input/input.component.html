@@ -1,0 +1,51 @@
+@if (label()) {
+  <label class="nvs-input__label" [for]="inputId">{{ label() }}</label>
+}
+
+<div class="nvs-input__field" (click)="focusControl($event, control)">
+  @if (type() === 'search') {
+    <nvs-icon class="nvs-input__icon" name="search" />
+  }
+
+  <input
+    #control
+    class="nvs-input__control"
+    [id]="inputId"
+    [type]="nativeType()"
+    [value]="value()"
+    [placeholder]="placeholder()"
+    [disabled]="isDisabled()"
+    [required]="required()"
+    [attr.name]="name()"
+    [attr.autocomplete]="autocomplete()"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-invalid]="invalid() || null"
+    [attr.aria-describedby]="describedBy()"
+    (input)="handleInput($event)"
+    (focus)="handleFocus($event)"
+    (blur)="handleBlur($event)"
+  />
+
+  @if (isPassword()) {
+    <button
+      type="button"
+      class="nvs-input__action"
+      [disabled]="isDisabled()"
+      [attr.aria-label]="passwordVisible() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+      [attr.aria-pressed]="passwordVisible()"
+      [attr.aria-controls]="inputId"
+      (click)="togglePasswordVisibility()"
+    >
+      <nvs-icon class="nvs-input__icon" [name]="passwordVisible() ? 'eye-off' : 'eye'" />
+    </button>
+  }
+</div>
+
+@if (invalid()) {
+  <p class="nvs-input__message nvs-input__message--error" [id]="errorId">
+    <nvs-icon class="nvs-input__message-icon" name="alert-circle" />
+    {{ error() }}
+  </p>
+} @else if (showHint()) {
+  <p class="nvs-input__message" [id]="hintId">{{ hint() }}</p>
+}

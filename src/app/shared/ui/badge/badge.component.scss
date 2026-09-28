@@ -1,0 +1,67 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--nvs-badge-gap);
+  max-width: 100%;
+  min-height: var(--nvs-badge-height);
+  padding: var(--nvs-badge-padding-block) var(--nvs-badge-padding-inline);
+  border-radius: var(--nvs-radius-pill);
+  color: var(--nvs-badge-text);
+  background: var(--nvs-badge-background);
+  font-family: var(--nvs-font-family-sans);
+  font-size: var(--nvs-badge-font-size);
+  font-weight: var(--nvs-font-weight-medium);
+  line-height: var(--nvs-line-height-tight);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.nvs-badge__dot {
+  flex: none;
+  width: var(--nvs-badge-dot-size);
+  height: var(--nvs-badge-dot-size);
+  border-radius: var(--nvs-radius-full);
+  background: var(--nvs-badge-dot, currentColor);
+}
+
+.nvs-badge__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Variantes: cada una mapea los tokens --nvs-color-badge-* a variables locales.
+
+:host(.nvs-badge--neutral) {
+  --nvs-badge-background: var(--nvs-color-badge-neutral-background);
+  --nvs-badge-text: var(--nvs-color-badge-neutral-text);
+}
+
+:host(.nvs-badge--info) {
+  --nvs-badge-background: var(--nvs-color-badge-info-background);
+  --nvs-badge-text: var(--nvs-color-badge-info-text);
+  --nvs-badge-dot: var(--nvs-color-badge-info-dot);
+}
+
+:host(.nvs-badge--success) {
+  --nvs-badge-background: var(--nvs-color-badge-success-background);
+  --nvs-badge-text: var(--nvs-color-badge-success-text);
+  --nvs-badge-dot: var(--nvs-color-badge-success-dot);
+}
+
+:host(.nvs-badge--warning) {
+  --nvs-badge-background: var(--nvs-color-badge-warning-background);
+  --nvs-badge-text: var(--nvs-color-badge-warning-text);
+  --nvs-badge-dot: var(--nvs-color-badge-warning-dot);
+}
+
+:host(.nvs-badge--error) {
+  --nvs-badge-background: var(--nvs-color-badge-error-background);
+  --nvs-badge-text: var(--nvs-color-badge-error-text);
+  --nvs-badge-dot: var(--nvs-color-badge-error-dot);
+}
+
+:host(.nvs-badge--dark) {
+  --nvs-badge-background: var(--nvs-color-badge-dark-background);
+  --nvs-badge-text: var(--nvs-color-badge-dark-text);
+  --nvs-badge-dot: var(--nvs-color-badge-dark-dot);
+}

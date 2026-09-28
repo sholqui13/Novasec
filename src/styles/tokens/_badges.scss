@@ -1,0 +1,31 @@
+:root {
+  --nvs-color-badge-neutral-background: var(--nvs-color-surface-muted);
+  --nvs-color-badge-neutral-text: var(--nvs-color-info);
+
+  --nvs-color-badge-info-background: var(--nvs-color-info-subtle);
+  --nvs-color-badge-info-text: var(--nvs-color-text-accent);
+  --nvs-color-badge-info-dot: var(--nvs-color-info);
+
+  --nvs-color-badge-success-background: var(--nvs-color-success-subtle);
+  --nvs-color-badge-success-text: var(--nvs-color-success);
+  --nvs-color-badge-success-dot: var(--nvs-color-success);
+
+  --nvs-color-badge-warning-background: var(--nvs-color-warning-subtle);
+  --nvs-color-badge-warning-text: var(--nvs-color-warning);
+  --nvs-color-badge-warning-dot: var(--nvs-color-warning);
+
+  --nvs-color-badge-error-background: var(--nvs-color-error-subtle);
+  --nvs-color-badge-error-text: var(--nvs-color-error);
+  --nvs-color-badge-error-dot: var(--nvs-color-error);
+
+  --nvs-color-badge-dark-background: var(--nvs-brand-primary);
+  --nvs-color-badge-dark-text: var(--nvs-neutral-0);
+  --nvs-color-badge-dark-dot: var(--nvs-neutral-0);
+}
+
+// Sobre el fondo oscuro de la app, el badge "dark" se invierte para seguir destacando.
+:root[data-theme='dark'] {
+  --nvs-color-badge-dark-background: var(--nvs-neutral-50);
+  --nvs-color-badge-dark-text: var(--nvs-brand-primary);
+  --nvs-color-badge-dark-dot: var(--nvs-brand-primary);
+}

@@ -1,0 +1,110 @@
+@use '../../../../styles/mixins/button';
+
+.nvs-toast {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--nvs-toast-gap);
+  width: 100%;
+  max-width: var(--nvs-toast-max-width);
+  padding: var(--nvs-toast-padding);
+  border: var(--nvs-border-width-default) solid var(--nvs-toast-accent);
+  border-left-width: var(--nvs-toast-accent-width);
+  border-radius: var(--nvs-radius-lg);
+  background: var(--nvs-color-toast-background);
+  box-shadow: var(--nvs-shadow-md);
+  font-family: var(--nvs-font-family-sans);
+  pointer-events: auto;
+  animation: nvs-toast-enter var(--nvs-motion-fast) var(--nvs-motion-easing-standard);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.nvs-toast--info {
+  --nvs-toast-accent: var(--nvs-color-toast-info);
+}
+
+.nvs-toast--success {
+  --nvs-toast-accent: var(--nvs-color-toast-success);
+}
+
+.nvs-toast--warning {
+  --nvs-toast-accent: var(--nvs-color-toast-warning);
+}
+
+.nvs-toast--error {
+  --nvs-toast-accent: var(--nvs-color-toast-error);
+  box-shadow: var(--nvs-shadow-md), var(--nvs-shadow-border-error);
+
+  .nvs-toast__close {
+    color: var(--nvs-toast-accent);
+  }
+}
+
+.nvs-toast__icon {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--nvs-toast-icon-container-size);
+  height: var(--nvs-toast-icon-container-size);
+  border-radius: var(--nvs-radius-full);
+  color: var(--nvs-color-toast-icon);
+  background: var(--nvs-toast-accent);
+}
+
+.nvs-toast__glyph {
+  --nvs-icon-size: var(--nvs-toast-icon-size);
+}
+
+.nvs-toast__content {
+  flex: 1;
+  min-width: 0;
+  padding-top: var(--nvs-space-1);
+}
+
+.nvs-toast__title {
+  margin: 0;
+  color: var(--nvs-color-toast-title);
+  font-size: var(--nvs-toast-title-font-size);
+  font-weight: var(--nvs-font-weight-medium);
+  line-height: var(--nvs-line-height-normal);
+}
+
+.nvs-toast__message {
+  margin: var(--nvs-space-2) 0 0;
+  color: var(--nvs-color-toast-message);
+  font-size: var(--nvs-toast-message-font-size);
+  line-height: var(--nvs-line-height-relaxed);
+}
+
+.nvs-toast__close {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  padding: var(--nvs-space-1);
+  border: 0;
+  border-radius: var(--nvs-radius-sm);
+  color: var(--nvs-color-toast-close);
+  background: transparent;
+  cursor: pointer;
+  @include button.interactive-transition;
+  @include button.touch-target;
+
+  &:hover {
+    color: var(--nvs-color-toast-close-hover);
+  }
+}
+
+.nvs-toast__close-icon {
+  --nvs-icon-size: var(--nvs-toast-close-icon-size);
+}
+
+@keyframes nvs-toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}

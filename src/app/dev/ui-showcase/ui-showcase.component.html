@@ -1,0 +1,293 @@
+<main class="showcase">
+  <header class="showcase__header">
+    <h1>Buttons</h1>
+    <button nvsButton variant="ghost" size="small" (clicked)="toggleTheme()">
+      {{ dark() ? 'Tema claro' : 'Tema oscuro' }}
+    </button>
+  </header>
+  <p class="showcase__lead">
+    Primary, secondary, ghost, danger y disabled. Pasa el mouse, haz click o navega con Tab para ver
+    hover, pressed y focus.
+  </p>
+
+  <section class="showcase__section">
+    <h2>Variants</h2>
+    <div class="showcase__row">
+      <button nvsButton variant="primary">Primary</button>
+      <button nvsButton variant="secondary">Secondary</button>
+      <button nvsButton variant="ghost">Ghost</button>
+      <button nvsButton variant="danger">Danger</button>
+      <button nvsButton disabled>Disabled</button>
+    </div>
+  </section>
+
+  <section class="showcase__section">
+    <h2>Disabled por variante</h2>
+    <div class="showcase__row">
+      <button nvsButton variant="primary" disabled>Primary</button>
+      <button nvsButton variant="secondary" disabled>Secondary</button>
+      <button nvsButton variant="ghost" disabled>Ghost</button>
+      <button nvsButton variant="danger" disabled>Danger</button>
+    </div>
+  </section>
+
+  <section class="showcase__section">
+    <h2>Sizes</h2>
+    <div class="showcase__row">
+      <button nvsButton size="small">Small</button>
+      <button nvsButton size="medium">Medium</button>
+      <button nvsButton size="large">Large</button>
+    </div>
+  </section>
+
+  <section class="showcase__section">
+    <h2>With icons &amp; loading</h2>
+    <div class="showcase__row">
+      <button nvsButton icon="plus">New Case</button>
+      <button nvsButton variant="secondary" icon="search">Search</button>
+      <button nvsButton [loading]="true">Loading...</button>
+      <button nvsButton [loading]="saving()" (clicked)="simulateSave()">
+        {{ saving() ? 'Saving...' : 'Save Changes' }}
+      </button>
+      <button nvsButton variant="secondary" icon="search" aria-label="Buscar"></button>
+    </div>
+  </section>
+
+  <section class="showcase__section">
+    <h2>Como enlace</h2>
+    <div class="showcase__row">
+      <a nvsButton variant="secondary" href="#">Ver detalle</a>
+      <a nvsButton variant="secondary" href="#" [disabled]="true">Enlace deshabilitado</a>
+    </div>
+  </section>
+
+  <h1 class="showcase__title">Inputs</h1>
+  <p class="showcase__lead">
+    Haz click o usa Tab para ver el estado focus/selected. Escribe en "With hint" para ver la
+    validación en vivo.
+  </p>
+
+  <section class="showcase__section showcase__grid">
+    <nvs-input label="Default" type="search" placeholder="Search cases..." />
+    <nvs-input label="Filled" value="Server Room B incident" />
+    <nvs-input
+      label="With hint"
+      placeholder="Enter case reference"
+      hint="Format: CASE-YYYY-NNNN"
+      [(value)]="caseReference"
+      [error]="caseReferenceError()"
+    />
+    <nvs-input
+      label="Error state"
+      value="invalid_ref"
+      error="Case reference format is invalid."
+    />
+    <nvs-input label="Disabled" placeholder="Read-only field" disabled />
+    <nvs-input label="Password" type="password" value="supersecret1" autocomplete="off" />
+    <nvs-input label="Password (error)" type="password" value="supersecret1" error="Incorrect password." autocomplete="off" />
+    <nvs-input label="Password (disabled)" type="password" value="supersecret1" disabled />
+    <nvs-input label="Search" type="search" placeholder="Search cases..." />
+    <nvs-input label="Required" placeholder="Placeholder" required />
+  </section>
+
+  <h1 class="showcase__title">Badges</h1>
+
+  <section class="showcase__section">
+    <h2>Badge variants</h2>
+    <div class="showcase__row">
+      <nvs-badge variant="neutral" label="Default" />
+      <nvs-badge variant="info" label="Default" />
+      <nvs-badge variant="success" label="Default" />
+      <nvs-badge variant="warning" label="Default" />
+      <nvs-badge variant="error" label="Default" />
+      <nvs-badge variant="dark" label="Default" />
+    </div>
+  </section>
+
+  <section class="showcase__section">
+    <h2>Case status badges</h2>
+    <div class="showcase__row">
+      @for (status of caseStatuses; track status) {
+        <nvs-case-status-badge [status]="status" />
+      }
+    </div>
+  </section>
+
+  <h1 class="showcase__title">Modals</h1>
+  <p class="showcase__lead">
+    Cierra con Cancelar, la X, Escape o click en el fondo. "Yes, delete case" simula una petición
+    de 1.5 s.
+  </p>
+
+  <section class="showcase__section">
+    <div class="showcase__row">
+      <button nvsButton variant="danger" (clicked)="deleteModalOpen.set(true)">Delete case</button>
+      <button nvsButton variant="secondary" (clicked)="logoutModalOpen.set(true)">Cerrar sesión</button>
+      <button nvsButton variant="ghost" (clicked)="standardModalOpen.set(true)">Standard</button>
+    </div>
+  </section>
+
+  <nvs-modal
+    type="confirmation"
+    destructive
+    title="Delete Case #1042?"
+    message="This action is permanent and cannot be undone. All case data, attachments, and evidence will be permanently removed."
+    cancelLabel="Cancel"
+    confirmLabel="Yes, delete case"
+    [confirmLoading]="deleting()"
+    [(open)]="deleteModalOpen"
+    (confirmed)="simulateDelete()"
+  />
+
+  <nvs-modal
+    type="confirmation"
+    destructive
+    title="¿Deseas cerrar sesión?"
+    message="Tendrás que volver a ingresar tus credenciales para acceder a Novasec."
+    [(open)]="logoutModalOpen"
+    (confirmed)="logoutModalOpen.set(false)"
+  />
+
+  <nvs-modal
+    title="Asignar caso"
+    message="El caso #1042 se asignará al equipo de respuesta de turno."
+    confirmLabel="Asignar"
+    [(open)]="standardModalOpen"
+    (confirmed)="standardModalOpen.set(false)"
+  />
+
+  <h1 class="showcase__title">Toast Notifications</h1>
+  <p class="showcase__lead">
+    Se cierran solos a los 3.5 s; la cuenta se pausa con el mouse encima o con foco dentro. Haz
+    click en una variante para lanzarla.
+  </p>
+
+  <section class="showcase__section">
+    <div class="showcase__row">
+      @for (toast of sampleToasts; track toast.type) {
+        <button nvsButton variant="secondary" size="small" (clicked)="showToast(toast)">
+          {{ toast.title }}
+        </button>
+      }
+    </div>
+  </section>
+
+  <section class="showcase__section showcase__stack">
+    @for (toast of sampleToasts; track toast.type) {
+      <nvs-toast
+        [type]="toast.type"
+        [title]="toast.title"
+        [message]="toast.message"
+        [duration]="toast.duration"
+      />
+    }
+  </section>
+
+  <h1 class="showcase__title">Alerts</h1>
+  <p class="showcase__lead">
+    Inline feedback messages for page-level notifications. La última es descartable.
+  </p>
+
+  <section class="showcase__section showcase__stack">
+    @for (type of alertTypes; track type) {
+      <nvs-alert
+        [type]="type"
+        title="No pudimos iniciar sesión"
+        message="El usuario o la contraseña no son correctos. Verifica los datos e inténtalo de nuevo."
+      />
+    }
+
+    @if (dismissibleAlertVisible()) {
+      <nvs-alert
+        type="error"
+        title="Alerta descartable"
+        message="Cierra con la X; el botón de abajo la vuelve a mostrar."
+        dismissible
+        (dismissed)="dismissibleAlertVisible.set(false)"
+      />
+    } @else {
+      <div>
+        <button nvsButton variant="secondary" size="small" (clicked)="dismissibleAlertVisible.set(true)">
+          Mostrar alerta de nuevo
+        </button>
+      </div>
+    }
+  </section>
+
+  <h1 class="showcase__title">Avatar</h1>
+  <p class="showcase__lead">
+    Avatar reutilizable con initials editables y tres tamaños. El último usa una imagen rota para
+    mostrar el fallback a iniciales.
+  </p>
+
+  <section class="showcase__section">
+    <div class="showcase__row">
+      <nvs-avatar size="small" initials="MA" />
+      <nvs-avatar size="medium" initials="MA" />
+      <nvs-avatar size="large" initials="MA" />
+      <nvs-avatar size="large" initials="JP" name="Juan Pérez" imageUrl="/imagen-que-no-existe.png" />
+    </div>
+  </section>
+
+  <h1 class="showcase__title">Icons</h1>
+  <p class="showcase__lead">
+    Catálogo disponible en <code>&lt;nvs-icon name="..." /&gt;</code>. Por defecto heredan el
+    tamaño (1em) y el color del texto que los rodea.
+  </p>
+
+  <section class="showcase__section">
+    <h2>Catálogo</h2>
+    <div class="showcase__icon-grid">
+      @for (name of iconNames; track name) {
+        <div class="showcase__icon-cell">
+          <nvs-icon [name]="name" size="large" />
+          <code>{{ name }}</code>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="showcase__section">
+    <h2>Sizes</h2>
+    <div class="showcase__row">
+      <nvs-icon name="search" size="xs" />
+      <nvs-icon name="search" size="small" />
+      <nvs-icon name="search" size="medium" />
+      <nvs-icon name="search" size="large" />
+    </div>
+  </section>
+
+  <section class="showcase__section">
+    <h2>Colors</h2>
+    <div class="showcase__row">
+      <nvs-icon name="alert-circle" size="large" />
+      <nvs-icon name="alert-circle" size="large" color="muted" />
+      <nvs-icon name="alert-circle" size="large" color="accent" />
+      <nvs-icon name="alert-circle" size="large" color="info" />
+      <nvs-icon name="check-circle" size="large" color="success" />
+      <nvs-icon name="alert-triangle" size="large" color="warning" />
+      <nvs-icon name="x-circle" size="large" color="error" />
+    </div>
+  </section>
+
+  <h1 class="showcase__title">Feedback States</h1>
+  <p class="showcase__lead">
+    Loading, empty, and error states for async content regions. "Retry" simula una recarga de 1.5 s.
+  </p>
+
+  <section class="showcase__section showcase__grid">
+    <nvs-feedback-state state="loading" title="Loading cases..." message="Fetching from server" />
+    <nvs-feedback-state state="empty" title="No cases found" message="Try adjusting your filters" />
+    @if (retrying()) {
+      <nvs-feedback-state state="loading" title="Loading cases..." message="Fetching from server" />
+    } @else {
+      <nvs-feedback-state
+        state="error"
+        title="Failed to load"
+        message="Connection error"
+        actionLabel="Retry"
+        (action)="simulateRetry()"
+      />
+    }
+  </section>
+</main>

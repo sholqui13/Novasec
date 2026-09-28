@@ -1,0 +1,38 @@
+:host {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--nvs-avatar-size);
+  height: var(--nvs-avatar-size);
+  overflow: hidden;
+  border-radius: var(--nvs-radius-full);
+  color: var(--nvs-color-avatar-text);
+  background: var(--nvs-color-avatar-background);
+  font-family: var(--nvs-font-family-sans);
+  font-size: var(--nvs-avatar-font-size);
+  font-weight: var(--nvs-font-weight-bold);
+  line-height: var(--nvs-line-height-tight);
+  user-select: none;
+}
+
+:host(.nvs-avatar--small) {
+  --nvs-avatar-size: var(--nvs-avatar-size-small);
+  --nvs-avatar-font-size: var(--nvs-avatar-font-size-small);
+}
+
+:host(.nvs-avatar--medium) {
+  --nvs-avatar-size: var(--nvs-avatar-size-medium);
+  --nvs-avatar-font-size: var(--nvs-avatar-font-size-medium);
+}
+
+:host(.nvs-avatar--large) {
+  --nvs-avatar-size: var(--nvs-avatar-size-large);
+  --nvs-avatar-font-size: var(--nvs-avatar-font-size-large);
+}
+
+.nvs-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

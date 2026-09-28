@@ -11,4 +11,9 @@
   --nvs-layout-padding-mobile: 1rem;
   --nvs-layout-gap-desktop: 1.25rem;
   --nvs-layout-gap-mobile: 0.75rem;
+
+  --nvs-z-toast: 1000;
 }
+
+$nvs-layout-breakpoint-tablet: 56.25rem;
+$nvs-layout-breakpoint-mobile: 37.5rem;

@@ -1,0 +1,146 @@
+@use '../../../../styles/mixins/button';
+
+.nvs-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nvs-input-label-gap);
+  min-width: 0;
+  font-family: var(--nvs-font-family-sans);
+}
+
+.nvs-input__label {
+  color: var(--nvs-color-input-label);
+  font-size: var(--nvs-input-label-font-size);
+  font-weight: var(--nvs-font-weight-medium);
+  line-height: var(--nvs-line-height-normal);
+}
+
+.nvs-input__field {
+  display: flex;
+  align-items: center;
+  gap: var(--nvs-input-gap);
+  min-height: var(--nvs-input-height);
+  padding-inline: var(--nvs-input-padding-inline);
+  border: var(--nvs-border-width-default) solid var(--nvs-color-input-border);
+  border-radius: var(--nvs-radius-lg);
+  color: var(--nvs-color-input-text);
+  background: var(--nvs-color-input-background);
+  cursor: text;
+  transition:
+    border-color var(--nvs-motion-fast) var(--nvs-motion-easing-standard),
+    box-shadow var(--nvs-motion-fast) var(--nvs-motion-easing-standard);
+
+  &:hover {
+    border-color: var(--nvs-color-input-border-hover);
+  }
+
+  &:focus-within {
+    border-color: var(--nvs-color-input-border-focus);
+    box-shadow: var(--nvs-shadow-border-focus);
+  }
+}
+
+// Botón dentro del campo (mostrar/ocultar contraseña).
+.nvs-input__action {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  margin-inline-end: calc(var(--nvs-space-1) * -1);
+  padding: var(--nvs-space-1);
+  border: 0;
+  border-radius: var(--nvs-radius-sm);
+  color: var(--nvs-color-input-icon);
+  background: transparent;
+  cursor: pointer;
+  @include button.touch-target;
+
+  &:hover:not(:disabled) {
+    color: var(--nvs-color-input-icon-hover);
+  }
+
+  .nvs-input__icon {
+    color: inherit;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: var(--nvs-border-width-focus) solid var(--nvs-color-focus);
+    outline-offset: 0;
+    box-shadow: none;
+  }
+}
+
+.nvs-input__icon {
+  --nvs-icon-size: var(--nvs-input-icon-size);
+  color: var(--nvs-color-input-icon);
+}
+
+.nvs-input__control {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font-size: var(--nvs-input-font-size);
+  line-height: var(--nvs-line-height-normal);
+
+  &::placeholder {
+    color: var(--nvs-color-input-placeholder);
+    opacity: 1;
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+
+  &::-webkit-search-cancel-button {
+    appearance: none;
+  }
+}
+
+.nvs-input__message {
+  display: flex;
+  align-items: center;
+  gap: var(--nvs-input-message-gap);
+  margin: calc(var(--nvs-input-message-gap) - var(--nvs-input-label-gap)) 0 0;
+  color: var(--nvs-color-input-hint);
+  font-size: var(--nvs-input-message-font-size);
+  line-height: var(--nvs-line-height-normal);
+}
+
+.nvs-input__message--error {
+  color: var(--nvs-color-input-error-text);
+}
+
+// Estados
+
+.nvs-input--invalid .nvs-input__field {
+  border-color: var(--nvs-color-input-border-error);
+  box-shadow: var(--nvs-shadow-border-error);
+}
+
+.nvs-input--disabled {
+  .nvs-input__label {
+    color: var(--nvs-color-input-disabled-text);
+  }
+
+  .nvs-input__field {
+    border-color: transparent;
+    color: var(--nvs-color-input-disabled-text);
+    background: var(--nvs-color-input-disabled-background);
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+
+  .nvs-input__control {
+    cursor: not-allowed;
+  }
+}

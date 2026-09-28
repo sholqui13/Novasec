@@ -1,0 +1,58 @@
+@mixin interactive-transition {
+  transition:
+    color var(--nvs-motion-fast) var(--nvs-motion-easing-standard),
+    background-color var(--nvs-motion-fast) var(--nvs-motion-easing-standard),
+    border-color var(--nvs-motion-fast) var(--nvs-motion-easing-standard),
+    box-shadow var(--nvs-motion-fast) var(--nvs-motion-easing-standard);
+}
+
+@mixin interactive {
+  &:not(:disabled, .nvs-button--disabled, .nvs-button--loading) {
+    @content;
+  }
+}
+
+@mixin touch-target {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, var(--nvs-touch-target-min));
+    height: max(100%, var(--nvs-touch-target-min));
+    transform: translate(-50%, -50%);
+  }
+}
+
+@mixin focus-visible {
+  &:focus-visible {
+    outline: var(--nvs-border-width-focus) solid var(--nvs-color-focus);
+    outline-offset: var(--nvs-focus-outline-offset);
+    box-shadow: var(--nvs-shadow-border-focus);
+  }
+}
+
+@mixin disabled-state {
+  &:disabled,
+  &.nvs-button--disabled {
+    color: var(--nvs-color-button-disabled-text);
+    background: var(--nvs-color-button-disabled-background);
+    border-color: transparent;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+@mixin spinner {
+  animation: nvs-button-spin var(--nvs-motion-spin-duration) linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes nvs-button-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}

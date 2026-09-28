@@ -1,0 +1,79 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--nvs-feedback-state-min-height);
+  padding: var(--nvs-feedback-state-padding);
+  border: var(--nvs-border-width-default) solid var(--nvs-feedback-state-border);
+  border-radius: var(--nvs-radius-xl);
+  background: var(--nvs-color-feedback-state-background);
+  font-family: var(--nvs-font-family-sans);
+  text-align: center;
+
+  --nvs-feedback-state-border: var(--nvs-color-feedback-state-border);
+}
+
+:host(.nvs-feedback-state--empty) {
+  --nvs-feedback-state-icon-color: var(--nvs-color-feedback-state-empty-icon);
+  --nvs-feedback-state-icon-background: var(--nvs-color-feedback-state-empty-icon-background);
+}
+
+:host(.nvs-feedback-state--error) {
+  --nvs-feedback-state-border: var(--nvs-color-feedback-state-error-border);
+  --nvs-feedback-state-icon-color: var(--nvs-color-feedback-state-error-icon);
+  --nvs-feedback-state-icon-background: var(--nvs-color-feedback-state-error-icon-background);
+}
+
+.nvs-feedback-state__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--nvs-feedback-state-icon-container-size);
+  height: var(--nvs-feedback-state-icon-container-size);
+  border-radius: var(--nvs-radius-full);
+  color: var(--nvs-feedback-state-icon-color);
+  background: var(--nvs-feedback-state-icon-background);
+}
+
+.nvs-feedback-state__glyph {
+  --nvs-icon-size: var(--nvs-feedback-state-icon-size);
+}
+
+.nvs-feedback-state__spinner {
+  width: var(--nvs-feedback-state-spinner-size);
+  height: var(--nvs-feedback-state-spinner-size);
+  border: var(--nvs-feedback-state-spinner-width) solid var(--nvs-color-feedback-state-spinner-track);
+  border-top-color: var(--nvs-color-feedback-state-spinner-arc);
+  border-radius: var(--nvs-radius-full);
+  animation: nvs-feedback-state-spin var(--nvs-motion-spin-duration) linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.nvs-feedback-state__title {
+  margin: var(--nvs-space-5) 0 0;
+  color: var(--nvs-color-feedback-state-title);
+  font-size: var(--nvs-feedback-state-title-font-size);
+  font-weight: var(--nvs-font-weight-medium);
+  line-height: var(--nvs-line-height-normal);
+}
+
+.nvs-feedback-state__message {
+  margin: var(--nvs-space-2) 0 0;
+  color: var(--nvs-color-feedback-state-message);
+  font-size: var(--nvs-feedback-state-message-font-size);
+  line-height: var(--nvs-line-height-normal);
+}
+
+.nvs-feedback-state__action {
+  margin-top: var(--nvs-space-4);
+}
+
+@keyframes nvs-feedback-state-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}

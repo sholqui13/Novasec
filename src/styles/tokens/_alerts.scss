@@ -1,0 +1,22 @@
+:root {
+  --nvs-color-alert-title: var(--nvs-color-text);
+  --nvs-color-alert-message: var(--nvs-color-text);
+  --nvs-color-alert-close: var(--nvs-color-text-muted);
+  --nvs-color-alert-close-hover: var(--nvs-color-text);
+
+  --nvs-color-alert-info-background: var(--nvs-color-info-subtle);
+  --nvs-color-alert-info-border: var(--nvs-color-info);
+  --nvs-color-alert-info-icon: var(--nvs-color-info);
+
+  --nvs-color-alert-success-background: var(--nvs-color-success-subtle);
+  --nvs-color-alert-success-border: var(--nvs-color-success);
+  --nvs-color-alert-success-icon: var(--nvs-color-success);
+
+  --nvs-color-alert-warning-background: var(--nvs-color-warning-subtle);
+  --nvs-color-alert-warning-border: var(--nvs-color-warning);
+  --nvs-color-alert-warning-icon: var(--nvs-color-warning);
+
+  --nvs-color-alert-error-background: var(--nvs-color-error-subtle);
+  --nvs-color-alert-error-border: var(--nvs-color-error);
+  --nvs-color-alert-error-icon: var(--nvs-color-error);
+}

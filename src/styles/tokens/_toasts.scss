@@ -1,0 +1,13 @@
+:root {
+  --nvs-color-toast-background: var(--nvs-color-surface);
+  --nvs-color-toast-title: var(--nvs-color-text);
+  --nvs-color-toast-message: var(--nvs-color-text-muted);
+  --nvs-color-toast-icon: var(--nvs-neutral-0);
+  --nvs-color-toast-close: var(--nvs-color-text-muted);
+  --nvs-color-toast-close-hover: var(--nvs-color-text);
+
+  --nvs-color-toast-info: var(--nvs-color-info);
+  --nvs-color-toast-success: var(--nvs-color-success);
+  --nvs-color-toast-warning: var(--nvs-color-warning);
+  --nvs-color-toast-error: var(--nvs-color-error);
+}

@@ -1,0 +1,122 @@
+@use '../../../../styles/mixins/button' as button;
+
+// Encapsulation None: todos los selectores van bajo .nvs-button para no filtrarse.
+.nvs-button {
+  position: relative;
+  display: inline-flex;
+  min-width: 0;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: var(--nvs-button-gap);
+  border: var(--nvs-border-width-default) solid transparent;
+  border-radius: var(--nvs-radius-lg);
+  color: var(--nvs-button-text);
+  background: var(--nvs-button-background);
+  box-shadow: var(--nvs-button-shadow, none);
+  font-family: var(--nvs-font-family-sans);
+  font-size: var(--nvs-button-font-size);
+  font-weight: var(--nvs-font-weight-semibold);
+  line-height: var(--nvs-line-height-tight);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  @include button.interactive-transition;
+  @include button.touch-target;
+  @include button.focus-visible;
+  @include button.disabled-state;
+}
+
+.nvs-button--loading {
+  cursor: progress;
+}
+
+.nvs-button--small {
+  min-height: var(--nvs-button-height-small);
+  padding-inline: var(--nvs-button-padding-small);
+  --nvs-button-font-size: var(--nvs-button-font-size-small);
+}
+
+.nvs-button--medium {
+  min-height: var(--nvs-button-height-medium);
+  padding-inline: var(--nvs-button-padding-medium);
+  --nvs-button-font-size: var(--nvs-button-font-size-medium);
+}
+
+.nvs-button--large {
+  min-height: var(--nvs-button-height-large);
+  padding-inline: var(--nvs-button-padding-large);
+  --nvs-button-font-size: var(--nvs-button-font-size-large);
+}
+
+.nvs-button--primary {
+  --nvs-button-background: var(--nvs-color-button-primary-background);
+  --nvs-button-text: var(--nvs-color-button-primary-text);
+  --nvs-button-shadow: var(--nvs-shadow-sm);
+
+  @include button.interactive {
+    &:hover {
+      --nvs-button-background: var(--nvs-color-button-primary-hover);
+    }
+
+    &:active {
+      --nvs-button-background: var(--nvs-color-button-primary-pressed);
+    }
+  }
+}
+
+.nvs-button--secondary {
+  --nvs-button-background: var(--nvs-color-button-secondary-background);
+  --nvs-button-text: var(--nvs-color-button-secondary-text);
+  border-color: var(--nvs-color-button-secondary-border);
+
+  @include button.interactive {
+    &:hover,
+    &:active {
+      --nvs-button-background: var(--nvs-color-button-secondary-hover);
+    }
+  }
+}
+
+.nvs-button--ghost {
+  --nvs-button-background: var(--nvs-color-button-ghost-background);
+  --nvs-button-text: var(--nvs-color-button-ghost-text);
+
+  @include button.interactive {
+    &:hover,
+    &:active {
+      --nvs-button-background: var(--nvs-color-button-ghost-hover);
+    }
+  }
+}
+
+.nvs-button--danger {
+  --nvs-button-background: var(--nvs-color-button-danger-background);
+  --nvs-button-text: var(--nvs-color-button-danger-text);
+  --nvs-button-shadow: var(--nvs-shadow-sm);
+
+  @include button.interactive {
+    &:hover,
+    &:active {
+      --nvs-button-background: var(--nvs-color-button-danger-hover);
+    }
+  }
+}
+
+.nvs-button__icon {
+  --nvs-icon-size: var(--nvs-button-icon-size);
+}
+
+.nvs-button__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.nvs-button__spinner {
+  @include button.spinner;
+}

@@ -1,0 +1,16 @@
+:root {
+  --nvs-color-modal-background: var(--nvs-color-surface);
+  --nvs-color-modal-footer-background: var(--nvs-color-surface-muted);
+  --nvs-color-modal-border: var(--nvs-color-border);
+  --nvs-color-modal-title: var(--nvs-color-text);
+  --nvs-color-modal-message: var(--nvs-color-text-muted);
+  --nvs-color-modal-close: var(--nvs-color-text-muted);
+  --nvs-color-modal-close-hover: var(--nvs-color-text);
+  --nvs-color-modal-overlay: rgb(11 31 45 / 48%);
+  --nvs-color-modal-danger-icon: var(--nvs-color-error);
+  --nvs-color-modal-danger-icon-background: var(--nvs-color-error-subtle);
+}
+
+:root[data-theme='dark'] {
+  --nvs-color-modal-overlay: rgb(0 0 0 / 64%);
+}

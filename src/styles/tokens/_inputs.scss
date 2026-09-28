@@ -1,0 +1,16 @@
+:root {
+  --nvs-color-input-background: var(--nvs-color-surface);
+  --nvs-color-input-border: var(--nvs-color-border);
+  --nvs-color-input-border-hover: var(--nvs-color-border-strong);
+  --nvs-color-input-border-focus: var(--nvs-color-focus);
+  --nvs-color-input-border-error: var(--nvs-color-error);
+  --nvs-color-input-text: var(--nvs-color-text);
+  --nvs-color-input-placeholder: var(--nvs-color-text-muted);
+  --nvs-color-input-icon: var(--nvs-color-text-muted);
+  --nvs-color-input-icon-hover: var(--nvs-color-text);
+  --nvs-color-input-label: var(--nvs-color-text);
+  --nvs-color-input-hint: var(--nvs-color-text-muted);
+  --nvs-color-input-error-text: var(--nvs-color-error);
+  --nvs-color-input-disabled-background: var(--nvs-color-surface-muted);
+  --nvs-color-input-disabled-text: var(--nvs-color-text-muted);
+}

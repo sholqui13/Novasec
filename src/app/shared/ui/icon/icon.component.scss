@@ -1,0 +1,57 @@
+.nvs-icon {
+  display: inline-flex;
+  flex: none;
+  width: var(--nvs-icon-size, 1em);
+  height: var(--nvs-icon-size, 1em);
+
+  > lucide-angular,
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.nvs-icon--xs {
+  --nvs-icon-size: var(--nvs-icon-size-xs);
+}
+
+.nvs-icon--small {
+  --nvs-icon-size: var(--nvs-icon-size-small);
+}
+
+.nvs-icon--medium {
+  --nvs-icon-size: var(--nvs-icon-size-medium);
+}
+
+.nvs-icon--large {
+  --nvs-icon-size: var(--nvs-icon-size-large);
+}
+
+.nvs-icon--muted {
+  color: var(--nvs-color-icon-muted);
+}
+
+.nvs-icon--accent {
+  color: var(--nvs-color-icon-accent);
+}
+
+.nvs-icon--inverse {
+  color: var(--nvs-color-icon-inverse);
+}
+
+.nvs-icon--info {
+  color: var(--nvs-color-icon-info);
+}
+
+.nvs-icon--success {
+  color: var(--nvs-color-icon-success);
+}
+
+.nvs-icon--warning {
+  color: var(--nvs-color-icon-warning);
+}
+
+.nvs-icon--error {
+  color: var(--nvs-color-icon-error);
+}

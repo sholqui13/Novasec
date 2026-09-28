@@ -1,0 +1,17 @@
+<nvs-icon class="nvs-alert__icon" [name]="icon()" />
+
+<div class="nvs-alert__content">
+  @if (title()) {
+    <p class="nvs-alert__title">{{ title() }}</p>
+  }
+  @if (message()) {
+    <p class="nvs-alert__message">{{ message() }}</p>
+  }
+  <ng-content />
+</div>
+
+@if (dismissible()) {
+  <button type="button" class="nvs-alert__close" aria-label="Cerrar alerta" (click)="dismissed.emit()">
+    <nvs-icon class="nvs-alert__close-icon" name="close" />
+  </button>
+}

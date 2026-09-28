@@ -1,0 +1,24 @@
+<span class="nvs-toast__icon" aria-hidden="true">
+  @switch (type()) {
+    @case ('success') {
+      <nvs-icon class="nvs-toast__glyph" name="check" />
+    }
+    @case ('error') {
+      <nvs-icon class="nvs-toast__glyph" name="close" />
+    }
+    @default {
+      <nvs-icon class="nvs-toast__glyph" name="exclamation" [strokeWidth]="3" />
+    }
+  }
+</span>
+
+<div class="nvs-toast__content">
+  <p class="nvs-toast__title">{{ title() }}</p>
+  @if (message()) {
+    <p class="nvs-toast__message">{{ message() }}</p>
+  }
+</div>
+
+<button type="button" class="nvs-toast__close" aria-label="Cerrar notificación" (click)="dismiss()">
+  <nvs-icon class="nvs-toast__close-icon" name="close" />
+</button>

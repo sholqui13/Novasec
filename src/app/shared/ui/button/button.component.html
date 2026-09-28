@@ -1,0 +1,7 @@
+@if (loading()) {
+  <nvs-icon class="nvs-button__icon nvs-button__spinner" name="loader" />
+} @else if (icon(); as icon) {
+  <nvs-icon class="nvs-button__icon" [name]="icon" />
+}
+
+<span class="nvs-button__label">{{ label() }}<ng-content /></span>

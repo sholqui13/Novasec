@@ -1,0 +1,60 @@
+<dialog
+  #dialog
+  class="nvs-modal"
+  [class.nvs-modal--confirmation]="isConfirmation()"
+  [class.nvs-modal--destructive]="destructive()"
+  [attr.role]="isConfirmation() ? 'alertdialog' : null"
+  [attr.aria-labelledby]="titleId"
+  [attr.aria-describedby]="message() ? messageId : null"
+  (cancel)="handleNativeCancel($event)"
+  (close)="handleNativeClose()"
+  (pointerdown)="handlePointerDown($event)"
+  (click)="handleClick($event)"
+>
+  <header class="nvs-modal__header">
+    <h2 class="nvs-modal__title" [id]="titleId">{{ title() }}</h2>
+    <button
+      type="button"
+      class="nvs-modal__close"
+      aria-label="Cerrar"
+      [disabled]="confirmLoading()"
+      (click)="cancel()"
+    >
+      <nvs-icon class="nvs-modal__close-icon" name="close" />
+    </button>
+  </header>
+
+  <div class="nvs-modal__body">
+    @if (destructive()) {
+      <span class="nvs-modal__icon" aria-hidden="true">
+        <nvs-icon class="nvs-modal__icon-svg" name="alert-triangle" />
+      </span>
+    }
+    <div class="nvs-modal__content">
+      @if (message()) {
+        <p class="nvs-modal__message" [id]="messageId">{{ message() }}</p>
+      }
+      <ng-content />
+    </div>
+  </div>
+
+  <footer class="nvs-modal__footer">
+    <button
+      nvsButton
+      variant="ghost"
+      [attr.autofocus]="destructive() ? '' : null"
+      [disabled]="confirmLoading()"
+      (clicked)="cancel()"
+    >
+      {{ cancelLabel() }}
+    </button>
+    <button
+      nvsButton
+      [variant]="destructive() ? 'danger' : 'primary'"
+      [loading]="confirmLoading()"
+      (clicked)="confirm()"
+    >
+      {{ confirmLabel() }}
+    </button>
+  </footer>
+</dialog>

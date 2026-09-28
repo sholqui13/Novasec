@@ -1,0 +1,23 @@
+:root {
+  --nvs-color-button-primary-background: var(--nvs-brand-secondary);
+  --nvs-color-button-primary-text: var(--nvs-brand-primary);
+  --nvs-color-button-primary-hover: var(--nvs-color-action-primary-hover);
+  --nvs-color-button-primary-pressed: var(--nvs-color-text-accent);
+  --nvs-color-button-secondary-background: transparent;
+  --nvs-color-button-secondary-text: var(--nvs-color-text-accent);
+  --nvs-color-button-secondary-border: var(--nvs-brand-secondary);
+  --nvs-color-button-secondary-hover: var(--nvs-color-action-secondary-hover);
+  --nvs-color-button-ghost-background: transparent;
+  --nvs-color-button-ghost-text: var(--nvs-color-text-muted);
+  --nvs-color-button-ghost-hover: var(--nvs-color-action-ghost-hover);
+  --nvs-color-button-danger-background: var(--nvs-color-error);
+  --nvs-color-button-danger-text: var(--nvs-color-text-inverse);
+  --nvs-color-button-danger-hover: var(--nvs-color-action-danger-hover);
+  --nvs-color-button-disabled-background: rgb(30 200 200 / 40%);
+  --nvs-color-button-disabled-text: var(--nvs-neutral-500);
+}
+
+:root[data-theme='dark'] {
+  --nvs-color-button-primary-pressed: var(--nvs-color-navigation-active);
+  --nvs-color-button-disabled-background: rgb(30 200 200 / 24%);
+}
