@@ -1,16 +1,19 @@
-@use '../../../../styles/mixins/button';
+@use 'mixins/button';
+@use 'functions' as *;
+
+$height: calculate-rem(40px);
 
 .nvs-input {
   display: flex;
   flex-direction: column;
-  gap: var(--nvs-input-label-gap);
+  gap: var(--nvs-space-2);
   min-width: 0;
   font-family: var(--nvs-font-family-sans);
 }
 
 .nvs-input__label {
   color: var(--nvs-color-input-label);
-  font-size: var(--nvs-input-label-font-size);
+  font-size: var(--nvs-font-size-small);
   font-weight: var(--nvs-font-weight-medium);
   line-height: var(--nvs-line-height-normal);
 }
@@ -18,9 +21,9 @@
 .nvs-input__field {
   display: flex;
   align-items: center;
-  gap: var(--nvs-input-gap);
-  min-height: var(--nvs-input-height);
-  padding-inline: var(--nvs-input-padding-inline);
+  gap: var(--nvs-space-2);
+  min-height: $height;
+  padding-inline: var(--nvs-space-3);
   border: var(--nvs-border-width-default) solid var(--nvs-color-input-border);
   border-radius: var(--nvs-radius-lg);
   color: var(--nvs-color-input-text);
@@ -76,7 +79,7 @@
 }
 
 .nvs-input__icon {
-  --nvs-icon-size: var(--nvs-input-icon-size);
+  --nvs-icon-size: var(--nvs-icon-size-small);
   color: var(--nvs-color-input-icon);
 }
 
@@ -87,7 +90,7 @@
   border: 0;
   color: inherit;
   background: transparent;
-  font-size: var(--nvs-input-font-size);
+  font-size: var(--nvs-font-size-small);
   line-height: var(--nvs-line-height-normal);
 
   &::placeholder {
@@ -109,10 +112,10 @@
 .nvs-input__message {
   display: flex;
   align-items: center;
-  gap: var(--nvs-input-message-gap);
-  margin: calc(var(--nvs-input-message-gap) - var(--nvs-input-label-gap)) 0 0;
+  gap: var(--nvs-space-1);
+  margin: calc(var(--nvs-space-1) - var(--nvs-space-2)) 0 0;
   color: var(--nvs-color-input-hint);
-  font-size: var(--nvs-input-message-font-size);
+  font-size: var(--nvs-font-size-caption);
   line-height: var(--nvs-line-height-normal);
 }
 

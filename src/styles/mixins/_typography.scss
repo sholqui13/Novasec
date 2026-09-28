@@ -1,0 +1,39 @@
+// Text Styles de Figma (Typography — Nunito).
+
+@mixin text-style($size, $weight, $line-height) {
+  font-size: var(--nvs-font-size-#{$size});
+  font-weight: var(--nvs-font-weight-#{$weight});
+  line-height: var(--nvs-line-height-#{$line-height});
+}
+
+@mixin display {
+  @include text-style(display, extrabold, tight);
+}
+
+@mixin h1 {
+  @include text-style(h1, bold, normal);
+}
+
+@mixin h2 {
+  @include text-style(h2, bold, normal);
+}
+
+@mixin h3 {
+  @include text-style(h3, semibold, normal);
+}
+
+@mixin body {
+  @include text-style(body, regular, relaxed);
+}
+
+@mixin body-medium {
+  @include text-style(body, semibold, relaxed);
+}
+
+@mixin small {
+  @include text-style(small, regular, relaxed);
+}
+
+@mixin caption {
+  @include text-style(caption, medium, relaxed);
+}

@@ -1,0 +1,47 @@
+<a class="app-shell__skip-link" href="#main-content" (click)="skipToContent($event, main)">
+  Saltar al contenido
+</a>
+
+<nvs-sidebar
+  id="app-shell-sidebar"
+  class="app-shell__sidebar"
+  [sections]="navSections"
+  [user]="user()"
+  [collapsed]="!isMobile() && sidebarCollapsed()"
+  [drawer]="isMobile()"
+  (toggle)="toggleSidebar()"
+  (search)="search($event)"
+  (logout)="logoutModalOpen.set(true)"
+/>
+
+<div class="app-shell__backdrop" aria-hidden="true" (click)="closeMobileNav()"></div>
+
+<nvs-header
+  class="app-shell__header"
+  [title]="pageTitle()"
+  [user]="user()"
+  [status]="systemStatus()"
+  [menuOpen]="mobileNavOpen()"
+  menuControls="app-shell-sidebar"
+  [inert]="mobileNavOpen()"
+  (menuToggle)="toggleMobileNav()"
+/>
+
+<main
+  #main
+  id="main-content"
+  class="app-shell__content"
+  tabindex="-1"
+  [inert]="mobileNavOpen()"
+>
+  <router-outlet />
+</main>
+
+<nvs-modal
+  type="confirmation"
+  destructive
+  title="¿Deseas cerrar sesión?"
+  message="Tendrás que volver a ingresar tus credenciales para acceder a Novasec."
+  [(open)]="logoutModalOpen"
+  (confirmed)="confirmLogout()"
+/>

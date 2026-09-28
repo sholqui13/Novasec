@@ -1,19 +1,19 @@
 :root {
-  --nvs-layout-min-viewport-width: 20rem;
+  --nvs-layout-min-viewport-width: 20rem; // 320px
   --nvs-layout-viewport-min-height: 100vh;
-  --nvs-layout-sidebar-width: 14rem;
-  --nvs-layout-rail-width: 5rem;
-  --nvs-layout-header-height: 4.5rem;
-  --nvs-layout-mobile-header-height: 4.25rem;
-  --nvs-layout-content-max-width: 90rem;
-  --nvs-layout-padding-desktop: 1.5rem;
-  --nvs-layout-padding-tablet: 1.125rem;
-  --nvs-layout-padding-mobile: 1rem;
-  --nvs-layout-gap-desktop: 1.25rem;
-  --nvs-layout-gap-mobile: 0.75rem;
+  --nvs-layout-sidebar-width: 14rem; // 224px
+  --nvs-layout-rail-width: 5rem; // 80px
+  --nvs-layout-rail-width-tablet: 4.5rem; // 72px
+  --nvs-layout-header-height: 4.5rem; // 72px
+  --nvs-layout-mobile-header-height: 4.25rem; // 68px
+  --nvs-layout-content-max-width: 90rem; // 1440px
+  --nvs-layout-padding-desktop: 1.5rem; // 24px
+  --nvs-layout-padding-tablet: 1.125rem; // 18px
+  --nvs-layout-padding-mobile: 1rem; // 16px
+  --nvs-layout-gap-desktop: 1.25rem; // 20px
+  --nvs-layout-gap-mobile: 0.75rem; // 12px
 
+  --nvs-z-header: 100;
+  --nvs-z-drawer: 200;
   --nvs-z-toast: 1000;
 }
-
-$nvs-layout-breakpoint-tablet: 56.25rem;
-$nvs-layout-breakpoint-mobile: 37.5rem;

@@ -1,0 +1,44 @@
+<div class="nvs-header__bar">
+  <button
+    #menuButton
+    type="button"
+    class="nvs-header__menu"
+    [attr.aria-controls]="menuControls()"
+    [attr.aria-expanded]="menuOpen()"
+    [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'"
+    (click)="menuToggle.emit()"
+  >
+    <nvs-icon [name]="menuOpen() ? 'close' : 'menu'" size="medium" />
+  </button>
+
+  <img
+    class="nvs-header__logo"
+    src="assets/images/logo/logo-label-dark.png"
+    alt="Novasec"
+  />
+
+  @if (user(); as user) {
+    <nvs-avatar class="nvs-header__avatar" size="medium" [initials]="user.initials" [name]="user.name" />
+  }
+</div>
+
+<div class="nvs-header__context">
+  <div class="nvs-header__heading">
+    @if (eyebrow()) {
+      <p class="nvs-header__eyebrow">{{ eyebrow() }}</p>
+    }
+    <h1 class="nvs-header__title">{{ title() }}</h1>
+  </div>
+
+  <div class="nvs-header__meta">
+    <p class="nvs-header__status" [class.nvs-header__status--offline]="status() === 'offline'" role="status">
+      <span class="nvs-header__status-dot" aria-hidden="true"></span>
+      {{ statusLabel() }}
+    </p>
+    <img
+      class="nvs-header__mark"
+      src="assets/images/logo/novasec-vector.svg"
+      alt="Novasec"
+    />
+  </div>
+</div>

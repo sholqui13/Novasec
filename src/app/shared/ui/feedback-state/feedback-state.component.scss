@@ -1,10 +1,17 @@
+@use 'functions' as *;
+
+$min-height: calculate-rem(217px);
+$icon-container-size: calculate-rem(48px);
+$spinner-size: calculate-rem(40px);
+$spinner-width: 2px;
+
 :host {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: var(--nvs-feedback-state-min-height);
-  padding: var(--nvs-feedback-state-padding);
+  min-height: $min-height;
+  padding: var(--nvs-space-8);
   border: var(--nvs-border-width-default) solid var(--nvs-feedback-state-border);
   border-radius: var(--nvs-radius-xl);
   background: var(--nvs-color-feedback-state-background);
@@ -29,21 +36,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--nvs-feedback-state-icon-container-size);
-  height: var(--nvs-feedback-state-icon-container-size);
+  width: $icon-container-size;
+  height: $icon-container-size;
   border-radius: var(--nvs-radius-full);
   color: var(--nvs-feedback-state-icon-color);
   background: var(--nvs-feedback-state-icon-background);
 }
 
 .nvs-feedback-state__glyph {
-  --nvs-icon-size: var(--nvs-feedback-state-icon-size);
+  --nvs-icon-size: var(--nvs-icon-size-medium);
 }
 
 .nvs-feedback-state__spinner {
-  width: var(--nvs-feedback-state-spinner-size);
-  height: var(--nvs-feedback-state-spinner-size);
-  border: var(--nvs-feedback-state-spinner-width) solid var(--nvs-color-feedback-state-spinner-track);
+  width: $spinner-size;
+  height: $spinner-size;
+  border: $spinner-width solid var(--nvs-color-feedback-state-spinner-track);
   border-top-color: var(--nvs-color-feedback-state-spinner-arc);
   border-radius: var(--nvs-radius-full);
   animation: nvs-feedback-state-spin var(--nvs-motion-spin-duration) linear infinite;
@@ -56,7 +63,7 @@
 .nvs-feedback-state__title {
   margin: var(--nvs-space-5) 0 0;
   color: var(--nvs-color-feedback-state-title);
-  font-size: var(--nvs-feedback-state-title-font-size);
+  font-size: var(--nvs-font-size-body);
   font-weight: var(--nvs-font-weight-medium);
   line-height: var(--nvs-line-height-normal);
 }
@@ -64,7 +71,7 @@
 .nvs-feedback-state__message {
   margin: var(--nvs-space-2) 0 0;
   color: var(--nvs-color-feedback-state-message);
-  font-size: var(--nvs-feedback-state-message-font-size);
+  font-size: var(--nvs-font-size-small);
   line-height: var(--nvs-line-height-normal);
 }
 

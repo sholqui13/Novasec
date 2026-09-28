@@ -1,0 +1,165 @@
+@use 'mixins/breakpoints' as bp;
+
+html:has(.app-shell--nav-open) {
+  @include bp.down(tablet) {
+    overflow: hidden;
+  }
+}
+
+.app-shell {
+  --app-shell-sidebar-width: var(--nvs-layout-sidebar-width);
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: var(--nvs-layout-mobile-header-height) auto minmax(0, 1fr);
+  grid-template-areas:
+    'header'
+    'context'
+    'content';
+  min-height: 100dvh;
+  background: var(--nvs-color-background);
+
+  @include bp.up(tablet) {
+    --app-shell-sidebar-width: var(--nvs-layout-rail-width-tablet);
+
+    grid-template-columns: var(--app-shell-sidebar-width) minmax(0, 1fr);
+    grid-template-rows: var(--nvs-layout-header-height) minmax(0, 1fr);
+    grid-template-areas:
+      'sidebar header'
+      'sidebar content';
+  }
+
+  @include bp.up(desktop) {
+    --app-shell-sidebar-width: var(--nvs-layout-sidebar-width);
+
+    transition: grid-template-columns var(--nvs-motion-fast) var(--nvs-motion-easing-standard);
+
+    &.app-shell--collapsed {
+      --app-shell-sidebar-width: var(--nvs-layout-rail-width);
+    }
+  }
+}
+
+.app-shell__skip-link {
+  position: fixed;
+  top: var(--nvs-space-2);
+  left: var(--nvs-space-2);
+  z-index: calc(var(--nvs-z-drawer) + 1);
+  padding: var(--nvs-space-2) var(--nvs-space-4);
+  border-radius: var(--nvs-radius-md);
+  color: var(--nvs-color-text-inverse);
+  background: var(--nvs-color-text);
+  font-weight: var(--nvs-font-weight-semibold);
+  text-decoration: none;
+  transform: translateY(-200%);
+
+  &:focus-visible {
+    transform: none;
+  }
+}
+
+// Sidebar: menú lateral superpuesto en mobile, columna fija desde tablet.
+// En tablet, expandido se abre encima del contenido sin mover la grilla.
+
+.app-shell__sidebar {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: var(--nvs-z-drawer);
+  width: var(--nvs-layout-sidebar-width);
+  height: 100dvh;
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition:
+    transform var(--nvs-motion-fast) var(--nvs-motion-easing-standard),
+    visibility 0s linear var(--nvs-motion-fast);
+
+  .app-shell--nav-open & {
+    box-shadow: var(--nvs-shadow-xl);
+    transform: none;
+    visibility: visible;
+    transition: transform var(--nvs-motion-fast) var(--nvs-motion-easing-standard);
+  }
+
+  @include bp.up(tablet) {
+    position: sticky;
+    top: 0;
+    z-index: var(--nvs-z-header);
+    grid-area: sidebar;
+    width: auto;
+    transform: none;
+    visibility: visible;
+    transition: none;
+  }
+
+  @include bp.only(tablet) {
+    .app-shell:not(.app-shell--collapsed) & {
+      z-index: var(--nvs-z-drawer);
+      width: var(--nvs-layout-sidebar-width);
+      box-shadow: var(--nvs-shadow-xl);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.app-shell__backdrop {
+  display: none;
+
+  .app-shell--nav-open & {
+    @include bp.down(tablet) {
+      position: fixed;
+      inset: 0;
+      z-index: calc(var(--nvs-z-drawer) - 1);
+      display: block;
+      background: var(--nvs-color-modal-overlay);
+    }
+  }
+}
+
+// Header: en mobile sus dos filas (barra y contexto) se ubican en la grilla por separado,
+// para que solo la barra quede fija arriba.
+
+.app-shell__header {
+  position: sticky;
+  top: 0;
+  z-index: var(--nvs-z-header);
+  grid-area: header;
+
+  @include bp.down(tablet) {
+    display: contents;
+
+    .nvs-header__bar {
+      position: sticky;
+      top: 0;
+      z-index: var(--nvs-z-header);
+      grid-area: header;
+    }
+
+    .nvs-header__context {
+      grid-area: context;
+    }
+  }
+}
+
+// Contenido
+
+.app-shell__content {
+  grid-area: content;
+  min-width: 0;
+  padding: var(--nvs-layout-padding-mobile);
+
+  &:focus {
+    outline: none;
+  }
+
+  @include bp.up(tablet) {
+    padding: var(--nvs-layout-padding-tablet);
+  }
+
+  @include bp.up(desktop) {
+    padding: var(--nvs-layout-padding-desktop);
+  }
+}

@@ -1,3 +1,9 @@
+@use 'functions' as *;
+
+$size-small: calculate-rem(24px);
+$size-medium: calculate-rem(36px);
+$size-large: calculate-rem(48px);
+
 :host {
   display: inline-flex;
   flex: none;
@@ -17,18 +23,18 @@
 }
 
 :host(.nvs-avatar--small) {
-  --nvs-avatar-size: var(--nvs-avatar-size-small);
-  --nvs-avatar-font-size: var(--nvs-avatar-font-size-small);
+  --nvs-avatar-size: #{$size-small};
+  --nvs-avatar-font-size: var(--nvs-font-size-micro);
 }
 
 :host(.nvs-avatar--medium) {
-  --nvs-avatar-size: var(--nvs-avatar-size-medium);
-  --nvs-avatar-font-size: var(--nvs-avatar-font-size-medium);
+  --nvs-avatar-size: #{$size-medium};
+  --nvs-avatar-font-size: var(--nvs-font-size-caption);
 }
 
 :host(.nvs-avatar--large) {
-  --nvs-avatar-size: var(--nvs-avatar-size-large);
-  --nvs-avatar-font-size: var(--nvs-avatar-font-size-large);
+  --nvs-avatar-size: #{$size-large};
+  --nvs-avatar-font-size: var(--nvs-font-size-body);
 }
 
 .nvs-avatar__image {

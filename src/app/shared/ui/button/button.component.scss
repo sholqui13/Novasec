@@ -1,4 +1,9 @@
-@use '../../../../styles/mixins/button' as button;
+@use 'mixins/button' as button;
+@use 'functions' as *;
+
+$height-small: calculate-rem(32px);
+$height-medium: calculate-rem(40px);
+$height-large: calculate-rem(48px);
 
 // Encapsulation None: todos los selectores van bajo .nvs-button para no filtrarse.
 .nvs-button {
@@ -8,7 +13,7 @@
   max-width: 100%;
   align-items: center;
   justify-content: center;
-  gap: var(--nvs-button-gap);
+  gap: var(--nvs-space-2);
   border: var(--nvs-border-width-default) solid transparent;
   border-radius: var(--nvs-radius-lg);
   color: var(--nvs-button-text);
@@ -33,21 +38,21 @@
 }
 
 .nvs-button--small {
-  min-height: var(--nvs-button-height-small);
-  padding-inline: var(--nvs-button-padding-small);
-  --nvs-button-font-size: var(--nvs-button-font-size-small);
+  min-height: $height-small;
+  padding-inline: var(--nvs-space-3);
+  --nvs-button-font-size: var(--nvs-font-size-small);
 }
 
 .nvs-button--medium {
-  min-height: var(--nvs-button-height-medium);
-  padding-inline: var(--nvs-button-padding-medium);
-  --nvs-button-font-size: var(--nvs-button-font-size-medium);
+  min-height: $height-medium;
+  padding-inline: var(--nvs-space-4);
+  --nvs-button-font-size: var(--nvs-font-size-small);
 }
 
 .nvs-button--large {
-  min-height: var(--nvs-button-height-large);
-  padding-inline: var(--nvs-button-padding-large);
-  --nvs-button-font-size: var(--nvs-button-font-size-large);
+  min-height: $height-large;
+  padding-inline: var(--nvs-space-6);
+  --nvs-button-font-size: var(--nvs-font-size-body);
 }
 
 .nvs-button--primary {
@@ -105,7 +110,7 @@
 }
 
 .nvs-button__icon {
-  --nvs-icon-size: var(--nvs-button-icon-size);
+  --nvs-icon-size: var(--nvs-icon-size-small);
 }
 
 .nvs-button__label {

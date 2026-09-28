@@ -1,0 +1,32 @@
+// Paletas del sidebar (input `theme`).
+.nvs-sidebar--dark {
+  --nvs-sidebar-background: var(--nvs-brand-primary);
+  --nvs-sidebar-text: var(--nvs-neutral-300);
+  --nvs-sidebar-text-strong: var(--nvs-neutral-0);
+  --nvs-sidebar-text-muted: var(--nvs-neutral-400);
+  --nvs-sidebar-divider: color-mix(in srgb, var(--nvs-neutral-0) 8%, transparent);
+  --nvs-sidebar-hover: color-mix(in srgb, var(--nvs-neutral-0) 6%, transparent);
+  --nvs-sidebar-active-background: color-mix(in srgb, var(--nvs-brand-secondary) 20%, transparent);
+  --nvs-sidebar-active-text: var(--nvs-brand-secondary);
+  --nvs-sidebar-field-background: color-mix(in srgb, var(--nvs-neutral-0) 6%, transparent);
+  --nvs-sidebar-field-border: color-mix(in srgb, var(--nvs-neutral-0) 12%, transparent);
+  --nvs-sidebar-badge-background: var(--nvs-brand-secondary);
+  --nvs-sidebar-badge-text: var(--nvs-brand-primary);
+}
+
+.nvs-sidebar--light {
+  --nvs-sidebar-background: var(--nvs-color-surface);
+  --nvs-sidebar-text: var(--nvs-color-navigation-text);
+  --nvs-sidebar-text-strong: var(--nvs-color-text);
+  --nvs-sidebar-text-muted: var(--nvs-color-text-muted);
+  --nvs-sidebar-divider: var(--nvs-color-border);
+  --nvs-sidebar-hover: var(--nvs-color-navigation-hover);
+  --nvs-sidebar-active-background: var(--nvs-color-navigation-active);
+  --nvs-sidebar-active-text: var(--nvs-color-navigation-text-active);
+  --nvs-sidebar-field-background: var(--nvs-color-surface-muted);
+  --nvs-sidebar-field-border: var(--nvs-color-border);
+  --nvs-sidebar-badge-background: var(--nvs-brand-primary);
+  --nvs-sidebar-badge-text: var(--nvs-neutral-0);
+
+  border-inline-end: var(--nvs-border-default);
+}

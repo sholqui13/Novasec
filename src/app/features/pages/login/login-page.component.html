@@ -1,0 +1,78 @@
+<main class="login">
+  <section class="login__hero">
+    <picture class="login__hero-media">
+      <source media="(min-width: 64rem)" srcset="assets/images/background/operations-facility.jpg" />
+      <img src="assets/images/background/operations-facility-responsive.jpg" alt="" fetchpriority="high" />
+    </picture>
+
+    <div class="login__hero-content">
+      <img
+        class="login__logo"
+        src="assets/images/logo/logo-label-dark.png"
+        alt="Novasec"
+      />
+
+      <div class="login__pitch">
+        <p class="login__eyebrow">
+          <span class="login__dot" aria-hidden="true"></span>
+          Inovisec · Security Operations
+        </p>
+        <p class="login__headline">Visibilidad inmediata para responder con precisión.</p>
+        <p class="login__description">
+          Centraliza alertas físicas, ubica cada incidente y coordina la respuesta desde un único
+          espacio operativo.
+        </p>
+      </div>
+
+      <p class="login__security">
+        <span class="login__dot login__dot--success" aria-hidden="true"></span>
+        Acceso protegido · Sesión auditada
+      </p>
+    </div>
+  </section>
+
+  <section class="login__panel">
+    <div class="login__card">
+      <h1 class="login__title">Accede a Novasec</h1>
+      <p class="login__subtitle">Ingresa tus credenciales corporativas para continuar.</p>
+
+      <form class="login__form" [formGroup]="form" (ngSubmit)="submit()">
+        @if (authError()) {
+          <nvs-alert type="error" title="No pudimos iniciar sesión" [message]="authError()" />
+        }
+
+        <nvs-input
+          label="Usuario"
+          formControlName="username"
+          name="username"
+          autocomplete="username"
+          required
+          [error]="usernameError()"
+        />
+        <nvs-input
+          label="Contraseña"
+          type="password"
+          formControlName="password"
+          name="password"
+          autocomplete="current-password"
+          required
+          [error]="passwordError()"
+        />
+
+        <button nvsButton type="submit" class="login__submit" [loading]="loading()">
+          {{ loading() ? 'Ingresando...' : 'Ingresar' }}
+        </button>
+      </form>
+
+      <p class="login__help">¿Problemas para acceder? Contacta a tu administrador de Inovisec.</p>
+    </div>
+
+    <p class="login__version">
+      Novasec
+      <span class="login__platform login__platform--mobile">Mobile</span>
+      <span class="login__platform login__platform--tablet">Tablet</span>
+      <span class="login__platform login__platform--desktop">Desktop</span>
+      · v{{ version }}
+    </p>
+  </section>
+</main>

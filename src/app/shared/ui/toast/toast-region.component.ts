@@ -25,29 +25,36 @@ import { ToastService } from './toast.service';
     </section>
   `,
   styles: `
+    @use 'mixins/breakpoints' as bp;
+
     .nvs-toast-region {
       position: fixed;
-      inset-block-start: var(--nvs-toast-region-offset);
-      inset-inline-end: var(--nvs-toast-region-offset);
+      inset-block-start: var(--nvs-space-6);
+      inset-inline: var(--nvs-space-6);
       z-index: var(--nvs-z-toast);
-      width: min(var(--nvs-toast-max-width), 100% - 2 * var(--nvs-toast-region-offset-mobile));
       pointer-events: none;
     }
 
     .nvs-toast-region__list {
       display: flex;
       flex-direction: column;
-      gap: var(--nvs-toast-stack-gap);
+      align-items: flex-end;
+      gap: var(--nvs-space-3);
       margin: 0;
       padding: 0;
       list-style: none;
     }
 
-    @media (max-width: 37.5rem) {
+    .nvs-toast-region__item {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+
+    @include bp.down(tablet) {
       .nvs-toast-region {
-        inset-block-start: var(--nvs-toast-region-offset-mobile);
-        inset-inline: var(--nvs-toast-region-offset-mobile);
-        width: auto;
+        inset-block-start: var(--nvs-space-4);
+        inset-inline: var(--nvs-space-4);
       }
     }
   `,

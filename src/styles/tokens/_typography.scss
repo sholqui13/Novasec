@@ -1,46 +1,23 @@
 :root {
   --nvs-font-family-sans: 'Nunito', sans-serif;
-  --nvs-font-size-micro-xs: 0.5625rem;
-  --nvs-font-size-micro: 0.625rem;
-  --nvs-font-size-compact-caption: 0.6875rem;
-  --nvs-font-size-caption: 0.75rem;
-  --nvs-font-size-label: 0.8125rem;
-  --nvs-font-size-small: 0.875rem;
-  --nvs-font-size-compact-body: 0.9375rem;
-  --nvs-font-size-body: 1rem;
-  --nvs-font-size-body-lg: 1.0625rem;
-  --nvs-font-size-subtitle: 1.125rem;
-  --nvs-font-size-h3: 1.25rem;
-  --nvs-font-size-h3-lg: 1.375rem;
-  --nvs-font-size-title: 1.5rem;
-  --nvs-font-size-h2: 1.75rem;
-  --nvs-font-size-h2-lg: 1.875rem;
-  --nvs-font-size-h1: 2.25rem;
-  --nvs-font-size-display-sm: 2.75rem;
-  --nvs-font-size-display: 3rem;
-
-  --nvs-font-size-xs: var(--nvs-font-size-caption);
-  --nvs-font-size-sm: var(--nvs-font-size-small);
-  --nvs-font-size-md: var(--nvs-font-size-body);
-  --nvs-font-size-lg: var(--nvs-font-size-subtitle);
-  --nvs-button-font-size-small: var(--nvs-font-size-small);
-  --nvs-button-font-size-medium: var(--nvs-font-size-small);
-  --nvs-button-font-size-large: var(--nvs-font-size-body);
-  --nvs-input-font-size: var(--nvs-font-size-small);
-  --nvs-input-label-font-size: var(--nvs-font-size-small);
-  --nvs-input-message-font-size: var(--nvs-font-size-caption);
-  --nvs-badge-font-size: var(--nvs-font-size-caption);
-  --nvs-modal-title-font-size: var(--nvs-font-size-subtitle);
-  --nvs-modal-message-font-size: var(--nvs-font-size-body);
-  --nvs-toast-title-font-size: var(--nvs-font-size-body);
-  --nvs-toast-message-font-size: var(--nvs-font-size-small);
-  --nvs-alert-title-font-size: var(--nvs-font-size-small);
-  --nvs-alert-message-font-size: var(--nvs-font-size-small);
-  --nvs-feedback-state-title-font-size: var(--nvs-font-size-body);
-  --nvs-feedback-state-message-font-size: var(--nvs-font-size-small);
-  --nvs-avatar-font-size-small: var(--nvs-font-size-micro);
-  --nvs-avatar-font-size-medium: var(--nvs-font-size-caption);
-  --nvs-avatar-font-size-large: var(--nvs-font-size-body);
+  --nvs-font-size-micro-xs: 0.5625rem; // 9px
+  --nvs-font-size-micro: 0.625rem; // 10px
+  --nvs-font-size-compact-caption: 0.6875rem; // 11px
+  --nvs-font-size-caption: 0.75rem; // 12px
+  --nvs-font-size-label: 0.8125rem; // 13px
+  --nvs-font-size-small: 0.875rem; // 14px
+  --nvs-font-size-compact-body: 0.9375rem; // 15px
+  --nvs-font-size-body: 1rem; // 16px
+  --nvs-font-size-body-lg: 1.0625rem; // 17px
+  --nvs-font-size-subtitle: 1.125rem; // 18px
+  --nvs-font-size-h3: 1.25rem; // 20px
+  --nvs-font-size-h3-lg: 1.375rem; // 22px
+  --nvs-font-size-title: 1.5rem; // 24px
+  --nvs-font-size-h2: 1.75rem; // 28px
+  --nvs-font-size-h2-lg: 1.875rem; // 30px
+  --nvs-font-size-h1: 2.25rem; // 36px
+  --nvs-font-size-display-sm: 2.75rem; // 44px
+  --nvs-font-size-display: 3rem; // 48px
 
   --nvs-font-weight-regular: 400;
   --nvs-font-weight-medium: 500;
@@ -51,5 +28,4 @@
   --nvs-line-height-tight: 1;
   --nvs-line-height-normal: 1.2;
   --nvs-line-height-relaxed: 1.5;
-  --nvs-line-height-compact: var(--nvs-line-height-tight);
 }

@@ -2,7 +2,7 @@ import { booleanAttribute, ChangeDetectionStrategy, Component, computed, input }
 
 export type BadgeVariant = 'neutral' | 'info' | 'success' | 'warning' | 'error' | 'dark';
 
-/** Variantes que en Figma llevan punto por defecto. */
+/** Variantes que llevan punto por defecto. */
 const VARIANTS_WITH_DOT: ReadonlySet<BadgeVariant> = new Set(['info', 'success', 'warning', 'error']);
 
 /** Etiqueta compacta de estado o categoría. El texto se pasa en `label` o como contenido. */

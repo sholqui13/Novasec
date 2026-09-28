@@ -1,0 +1,281 @@
+@use 'mixins/button';
+@use 'functions' as *;
+
+$link-height: calculate-rem(36px);
+$search-height: calculate-rem(32px);
+$collapse-size: calculate-rem(24px);
+$badge-size: calculate-rem(20px);
+$badge-size-rail: calculate-rem(16px);
+
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  color: var(--nvs-sidebar-text);
+  background: var(--nvs-sidebar-background);
+  font-family: var(--nvs-font-family-sans);
+}
+
+// Perfil
+
+.nvs-sidebar__profile {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--nvs-space-3);
+  padding: var(--nvs-space-4);
+  border-bottom: var(--nvs-border-width-default) solid var(--nvs-sidebar-divider);
+
+  :host(.nvs-sidebar--collapsed) & {
+    justify-content: center;
+    padding-inline: var(--nvs-space-2);
+  }
+}
+
+.nvs-sidebar__user {
+  flex: 1;
+  min-width: 0;
+}
+
+.nvs-sidebar__user-name,
+.nvs-sidebar__user-role {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: var(--nvs-line-height-normal);
+}
+
+.nvs-sidebar__user-name {
+  color: var(--nvs-sidebar-text-strong);
+  font-size: var(--nvs-font-size-small);
+  font-weight: var(--nvs-font-weight-bold);
+}
+
+.nvs-sidebar__user-role {
+  color: var(--nvs-sidebar-text-muted);
+  font-size: var(--nvs-font-size-caption);
+}
+
+.nvs-sidebar__avatar-button,
+.nvs-sidebar__collapse {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  @include button.interactive-transition;
+  @include button.touch-target;
+}
+
+.nvs-sidebar__avatar-button {
+  border-radius: var(--nvs-radius-full);
+}
+
+.nvs-sidebar__collapse {
+  width: $collapse-size;
+  height: $collapse-size;
+  border-radius: var(--nvs-radius-full);
+  color: var(--nvs-sidebar-text-muted);
+  background: var(--nvs-sidebar-field-background);
+
+  &:hover {
+    color: var(--nvs-sidebar-text-strong);
+    background: var(--nvs-sidebar-hover);
+  }
+}
+
+// Búsqueda
+
+.nvs-sidebar__search {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  margin: var(--nvs-space-3) var(--nvs-space-3) 0;
+}
+
+.nvs-sidebar__search-icon {
+  position: absolute;
+  left: var(--nvs-space-3);
+  color: var(--nvs-sidebar-text-muted);
+  pointer-events: none;
+}
+
+.nvs-sidebar__search-input {
+  width: 100%;
+  height: $search-height;
+  padding: 0 var(--nvs-space-3) 0 calc(var(--nvs-space-3) * 2 + var(--nvs-icon-size-small));
+  border: var(--nvs-border-width-default) solid var(--nvs-sidebar-field-border);
+  border-radius: var(--nvs-radius-lg);
+  color: var(--nvs-sidebar-text-strong);
+  background: var(--nvs-sidebar-field-background);
+  font-size: var(--nvs-font-size-label);
+
+  &::placeholder {
+    color: var(--nvs-sidebar-text-muted);
+  }
+
+  &::-webkit-search-cancel-button {
+    appearance: none;
+  }
+
+  &:focus-visible {
+    border-color: var(--nvs-color-focus);
+    outline: none;
+    box-shadow: var(--nvs-shadow-border-focus);
+  }
+}
+
+// Navegación
+
+.nvs-sidebar__nav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.nvs-sidebar__section {
+  padding: var(--nvs-space-3) var(--nvs-space-2);
+
+  & + & {
+    border-top: var(--nvs-border-width-default) solid var(--nvs-sidebar-divider);
+  }
+}
+
+.nvs-sidebar__section-label {
+  margin: var(--nvs-space-2) var(--nvs-space-2) var(--nvs-space-2);
+  color: var(--nvs-sidebar-text-muted);
+  font-size: var(--nvs-font-size-compact-caption);
+  font-weight: var(--nvs-font-weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  :host(.nvs-sidebar--collapsed) & {
+    @include sr-only;
+  }
+}
+
+.nvs-sidebar__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--nvs-space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .nvs-sidebar__section + & {
+    padding: 0 var(--nvs-space-2) var(--nvs-space-3);
+  }
+}
+
+.nvs-sidebar__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--nvs-space-3);
+  width: 100%;
+  min-height: $link-height;
+  padding: 0 var(--nvs-space-3);
+  border: 0;
+  border-radius: var(--nvs-radius-lg);
+  color: var(--nvs-sidebar-text);
+  background: transparent;
+  font-family: inherit;
+  font-size: var(--nvs-font-size-small);
+  font-weight: var(--nvs-font-weight-medium);
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+  @include button.interactive-transition;
+
+  &:hover {
+    color: var(--nvs-sidebar-text-strong);
+    background: var(--nvs-sidebar-hover);
+  }
+
+  &:focus-visible {
+    outline: var(--nvs-border-width-focus) solid var(--nvs-color-focus);
+    outline-offset: 0;
+    box-shadow: none;
+  }
+
+  :host(.nvs-sidebar--collapsed) & {
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+.nvs-sidebar__link--active {
+  color: var(--nvs-sidebar-active-text);
+  background: var(--nvs-sidebar-active-background);
+
+  &:hover {
+    color: var(--nvs-sidebar-active-text);
+    background: var(--nvs-sidebar-active-background);
+  }
+}
+
+.nvs-sidebar__icon {
+  color: inherit;
+  opacity: 0.8;
+
+  .nvs-sidebar__link--active & {
+    opacity: 1;
+  }
+}
+
+.nvs-sidebar__label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  :host(.nvs-sidebar--collapsed) & {
+    @include sr-only;
+  }
+}
+
+.nvs-sidebar__badge {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  min-width: $badge-size;
+  height: $badge-size;
+  padding-inline: var(--nvs-space-1);
+  border-radius: var(--nvs-radius-full);
+  color: var(--nvs-sidebar-badge-text);
+  background: var(--nvs-sidebar-badge-background);
+  font-size: var(--nvs-font-size-compact-caption);
+  font-weight: var(--nvs-font-weight-bold);
+  line-height: var(--nvs-line-height-tight);
+
+  :host(.nvs-sidebar--collapsed) & {
+    position: absolute;
+    top: var(--nvs-space-1);
+    right: var(--nvs-space-1);
+    min-width: $badge-size-rail;
+    height: $badge-size-rail;
+    font-size: var(--nvs-font-size-micro);
+  }
+}
+
+.nvs-sidebar__sr-only {
+  @include sr-only;
+}

@@ -1,0 +1,93 @@
+<div class="nvs-sidebar__profile">
+  @if (collapsed()) {
+    <button
+      #toggleButton
+      type="button"
+      class="nvs-sidebar__avatar-button"
+      aria-label="Expandir menú"
+      aria-expanded="false"
+      (click)="toggle.emit()"
+    >
+      <nvs-avatar size="medium" [initials]="user()?.initials ?? ''" />
+    </button>
+  } @else {
+    @if (user(); as user) {
+      <nvs-avatar size="medium" [initials]="user.initials" />
+      <div class="nvs-sidebar__user">
+        <p class="nvs-sidebar__user-name">{{ user.name }}</p>
+        @if (user.jobTitle) {
+          <p class="nvs-sidebar__user-role">{{ user.jobTitle }}</p>
+        }
+      </div>
+    }
+    <button
+      #toggleButton
+      type="button"
+      class="nvs-sidebar__collapse"
+      [attr.aria-label]="drawer() ? 'Cerrar menú' : 'Contraer menú'"
+      aria-expanded="true"
+      (click)="toggle.emit()"
+    >
+      <nvs-icon name="chevron-right" size="xs" />
+    </button>
+  }
+</div>
+
+@if (!collapsed()) {
+  <form class="nvs-sidebar__search" role="search" (submit)="submitSearch($event, query.value)">
+    <nvs-icon class="nvs-sidebar__search-icon" name="search" size="small" />
+    <input
+      #query
+      class="nvs-sidebar__search-input"
+      type="search"
+      name="q"
+      placeholder="Search..."
+      aria-label="Buscar casos"
+    />
+  </form>
+}
+
+<nav class="nvs-sidebar__nav" aria-label="Navegación principal">
+  @for (section of sections(); track $index) {
+    <div class="nvs-sidebar__section">
+      @if (section.label) {
+        <p class="nvs-sidebar__section-label">{{ section.label }}</p>
+      }
+      <ul class="nvs-sidebar__list">
+        @for (item of section.items; track item.path) {
+          <li>
+            <a
+              class="nvs-sidebar__link"
+              [routerLink]="item.path"
+              routerLinkActive="nvs-sidebar__link--active"
+              [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
+              ariaCurrentWhenActive="page"
+              [attr.title]="collapsed() ? item.label : null"
+            >
+              <nvs-icon class="nvs-sidebar__icon" [name]="item.icon" size="small" />
+              <span class="nvs-sidebar__label">{{ item.label }}</span>
+              @if (item.badge) {
+                <span class="nvs-sidebar__badge" aria-hidden="true">{{ item.badge }}</span>
+                <span class="nvs-sidebar__sr-only">, {{ item.badge }} pendientes</span>
+              }
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  }
+
+  <ul class="nvs-sidebar__list">
+    <li>
+      <button
+        type="button"
+        class="nvs-sidebar__link"
+        [attr.title]="collapsed() ? 'Logout' : null"
+        (click)="logout.emit()"
+      >
+        <nvs-icon class="nvs-sidebar__icon" name="logout" size="small" />
+        <span class="nvs-sidebar__label">Logout</span>
+      </button>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,45 @@
+@use 'sass:map';
+@use '../functions' as *;
+
+// Mobile-first. Frames del Handoff: mobile 390px, tablet 900px, desktop 1440px.
+$breakpoints: (
+  tablet: calculate-rem(600px),
+  desktop: calculate-rem(1024px),
+);
+
+@function get($name) {
+  @if not map.has-key($breakpoints, $name) {
+    @error 'Breakpoint "#{$name}" no existe. Usa: #{map.keys($breakpoints)}';
+  }
+  @return map.get($breakpoints, $name);
+}
+
+@mixin up($name) {
+  @media (width >= #{get($name)}) {
+    @content;
+  }
+}
+
+@mixin down($name) {
+  @media (width < #{get($name)}) {
+    @content;
+  }
+}
+
+@mixin only($name) {
+  @if $name == mobile {
+    @include down(tablet) {
+      @content;
+    }
+  } @else if $name == tablet {
+    @media (#{get(tablet)} <= width < #{get(desktop)}) {
+      @content;
+    }
+  } @else if $name == desktop {
+    @include up(desktop) {
+      @content;
+    }
+  } @else {
+    @error 'Usa mobile, tablet o desktop.';
+  }
+}

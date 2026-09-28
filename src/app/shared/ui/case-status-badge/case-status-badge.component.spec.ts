@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import type { CaseStatus } from '../../../core/models';
+import type { CaseStatus } from '@core/models';
 import { CASE_STATUS_CONFIG, CaseStatusBadgeComponent } from './case-status-badge.component';
 
 describe('CaseStatusBadgeComponent', () => {

@@ -1,15 +1,21 @@
+@use 'functions' as *;
+
+$height: calculate-rem(26px);
+$gap: calculate-rem(6px);
+$dot-size: calculate-rem(6px);
+
 :host {
   display: inline-flex;
   align-items: center;
-  gap: var(--nvs-badge-gap);
+  gap: $gap;
   max-width: 100%;
-  min-height: var(--nvs-badge-height);
-  padding: var(--nvs-badge-padding-block) var(--nvs-badge-padding-inline);
+  min-height: $height;
+  padding: var(--nvs-space-1) var(--nvs-space-2);
   border-radius: var(--nvs-radius-pill);
   color: var(--nvs-badge-text);
   background: var(--nvs-badge-background);
   font-family: var(--nvs-font-family-sans);
-  font-size: var(--nvs-badge-font-size);
+  font-size: var(--nvs-font-size-caption);
   font-weight: var(--nvs-font-weight-medium);
   line-height: var(--nvs-line-height-tight);
   white-space: nowrap;
@@ -18,8 +24,8 @@
 
 .nvs-badge__dot {
   flex: none;
-  width: var(--nvs-badge-dot-size);
-  height: var(--nvs-badge-dot-size);
+  width: $dot-size;
+  height: $dot-size;
   border-radius: var(--nvs-radius-full);
   background: var(--nvs-badge-dot, currentColor);
 }

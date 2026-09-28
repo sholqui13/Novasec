@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
-import type { CaseStatus } from '../../../core/models';
+import type { CaseStatus } from '@core/models';
 import { BadgeComponent, type BadgeVariant } from '../badge';
 
 interface CaseStatusConfig {

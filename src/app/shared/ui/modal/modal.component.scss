@@ -1,13 +1,19 @@
-@use '../../../../styles/mixins/button';
+@use 'mixins/button';
+@use 'mixins/typography' as type;
+@use 'functions' as *;
+
+$max-width: calculate-rem(384px);
+$icon-container-size: calculate-rem(40px);
+$close-icon-size: calculate-rem(18px);
 
 html:has(.nvs-modal[open]) {
   overflow: hidden;
 }
 
 .nvs-modal {
-  width: min(var(--nvs-modal-max-width), 100% - 2 * var(--nvs-modal-viewport-margin));
+  width: min($max-width, 100% - 2 * var(--nvs-space-4));
   max-width: none;
-  max-height: calc(100dvh - 2 * var(--nvs-modal-viewport-margin));
+  max-height: calc(100dvh - 2 * var(--nvs-space-4));
   margin: auto;
   padding: 0;
   overflow: hidden;
@@ -42,15 +48,15 @@ html:has(.nvs-modal[open]) {
   flex: none;
   align-items: center;
   justify-content: space-between;
-  gap: var(--nvs-modal-gap);
-  padding: var(--nvs-modal-padding);
+  gap: var(--nvs-space-4);
+  padding: var(--nvs-space-6);
   border-bottom: var(--nvs-border-width-default) solid var(--nvs-color-modal-border);
 }
 
 .nvs-modal__title {
   margin: 0;
   color: var(--nvs-color-modal-title);
-  font-size: var(--nvs-modal-title-font-size);
+  font-size: var(--nvs-font-size-subtitle);
   font-weight: var(--nvs-font-weight-medium);
   line-height: var(--nvs-line-height-normal);
 }
@@ -82,14 +88,14 @@ html:has(.nvs-modal[open]) {
 }
 
 .nvs-modal__close-icon {
-  --nvs-icon-size: var(--nvs-modal-close-icon-size);
+  --nvs-icon-size: #{$close-icon-size};
 }
 
 .nvs-modal__body {
   display: flex;
   align-items: flex-start;
-  gap: var(--nvs-modal-gap);
-  padding: var(--nvs-modal-padding);
+  gap: var(--nvs-space-4);
+  padding: var(--nvs-space-6);
   overflow-y: auto;
 }
 
@@ -98,15 +104,15 @@ html:has(.nvs-modal[open]) {
   flex: none;
   align-items: center;
   justify-content: center;
-  width: var(--nvs-modal-icon-container-size);
-  height: var(--nvs-modal-icon-container-size);
+  width: $icon-container-size;
+  height: $icon-container-size;
   border-radius: var(--nvs-radius-full);
   color: var(--nvs-color-modal-danger-icon);
   background: var(--nvs-color-modal-danger-icon-background);
 }
 
 .nvs-modal__icon-svg {
-  --nvs-icon-size: var(--nvs-modal-icon-size);
+  --nvs-icon-size: var(--nvs-icon-size-medium);
 }
 
 .nvs-modal__content {
@@ -117,8 +123,7 @@ html:has(.nvs-modal[open]) {
 .nvs-modal__message {
   margin: 0;
   color: var(--nvs-color-modal-message);
-  font-size: var(--nvs-modal-message-font-size);
-  line-height: var(--nvs-line-height-relaxed);
+  @include type.body;
 }
 
 .nvs-modal__footer {
@@ -128,7 +133,7 @@ html:has(.nvs-modal[open]) {
   align-items: center;
   justify-content: flex-end;
   gap: var(--nvs-space-3);
-  padding: var(--nvs-modal-footer-padding-block) var(--nvs-modal-padding);
+  padding: var(--nvs-space-4) var(--nvs-space-6);
   border-top: var(--nvs-border-width-default) solid var(--nvs-color-modal-border);
   background: var(--nvs-color-modal-footer-background);
 }
@@ -136,7 +141,7 @@ html:has(.nvs-modal[open]) {
 @keyframes nvs-modal-enter {
   from {
     opacity: 0;
-    transform: translateY(0.5rem) scale(0.98);
+    transform: translateY(calculate-rem(8px)) scale(0.98);
   }
 }
 

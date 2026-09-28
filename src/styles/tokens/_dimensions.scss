@@ -1,23 +1,23 @@
 :root {
   --nvs-space-0: 0;
-  --nvs-space-1: 0.25rem;
-  --nvs-space-2: 0.5rem;
-  --nvs-space-3: 0.75rem;
-  --nvs-space-4: 1rem;
-  --nvs-space-5: 1.25rem;
-  --nvs-space-6: 1.5rem;
-  --nvs-space-8: 2rem;
-  --nvs-space-10: 2.5rem;
-  --nvs-space-12: 3rem;
-  --nvs-space-16: 4rem;
-  --nvs-space-20: 5rem;
-  --nvs-space-24: 6rem;
+  --nvs-space-1: 0.25rem; // 4px
+  --nvs-space-2: 0.5rem; // 8px
+  --nvs-space-3: 0.75rem; // 12px
+  --nvs-space-4: 1rem; // 16px
+  --nvs-space-5: 1.25rem; // 20px
+  --nvs-space-6: 1.5rem; // 24px
+  --nvs-space-8: 2rem; // 32px
+  --nvs-space-10: 2.5rem; // 40px
+  --nvs-space-12: 3rem; // 48px
+  --nvs-space-16: 4rem; // 64px
+  --nvs-space-20: 5rem; // 80px
+  --nvs-space-24: 6rem; // 96px
 
-  --nvs-radius-sm: 0.25rem;
-  --nvs-radius-md: 0.5rem;
-  --nvs-radius-lg: 0.75rem;
-  --nvs-radius-xl: 1rem;
-  --nvs-radius-2xl: 1.5rem;
+  --nvs-radius-sm: 0.25rem; // 4px
+  --nvs-radius-md: 0.5rem; // 8px
+  --nvs-radius-lg: 0.75rem; // 12px
+  --nvs-radius-xl: 1rem; // 16px
+  --nvs-radius-2xl: 1.5rem; // 24px
   --nvs-radius-full: 9999px;
   --nvs-radius-pill: var(--nvs-radius-full);
 
@@ -28,69 +28,10 @@
   --nvs-border-width-thin: var(--nvs-border-width-default);
   --nvs-border-width-medium: var(--nvs-border-width-strong);
 
-  --nvs-button-height-small: 2rem;
-  --nvs-button-height-medium: 2.5rem;
-  --nvs-button-height-large: 3rem;
-  --nvs-button-padding-small: var(--nvs-space-3);
-  --nvs-button-padding-medium: var(--nvs-space-4);
-  --nvs-button-padding-large: var(--nvs-space-6);
-  --nvs-button-gap: var(--nvs-space-2);
-  --nvs-button-icon-size: 1rem;
+  --nvs-touch-target-min: 2.75rem; // 44px
 
-  --nvs-input-height: 2.5rem;
-  --nvs-input-padding-inline: var(--nvs-space-3);
-  --nvs-input-gap: var(--nvs-space-2);
-  --nvs-input-icon-size: 1rem;
-  --nvs-input-label-gap: var(--nvs-space-2);
-  --nvs-input-message-gap: var(--nvs-space-1);
-
-  --nvs-badge-height: 1.625rem;
-  --nvs-badge-padding-inline: var(--nvs-space-2);
-  --nvs-badge-padding-block: var(--nvs-space-1);
-  --nvs-badge-gap: 0.375rem;
-  --nvs-badge-dot-size: 0.375rem;
-
-  --nvs-modal-max-width: 24rem;
-  --nvs-modal-viewport-margin: var(--nvs-space-4);
-  --nvs-modal-padding: var(--nvs-space-6);
-  --nvs-modal-footer-padding-block: var(--nvs-space-4);
-  --nvs-modal-gap: var(--nvs-space-4);
-  --nvs-modal-icon-container-size: 2.5rem;
-  --nvs-modal-icon-size: 1.25rem;
-  --nvs-modal-close-icon-size: 1.125rem;
-
-  --nvs-toast-max-width: 24rem;
-  --nvs-toast-padding: var(--nvs-space-4);
-  --nvs-toast-gap: var(--nvs-space-4);
-  --nvs-toast-accent-width: 4px;
-  --nvs-toast-icon-container-size: 2.25rem;
-  --nvs-toast-icon-size: 1.125rem;
-  --nvs-toast-close-icon-size: 1rem;
-  --nvs-toast-region-offset: var(--nvs-space-6);
-  --nvs-toast-region-offset-mobile: var(--nvs-space-4);
-  --nvs-toast-stack-gap: var(--nvs-space-3);
-
-  --nvs-alert-padding-block: var(--nvs-space-4);
-  --nvs-alert-padding-inline: var(--nvs-space-4);
-  --nvs-alert-gap: var(--nvs-space-3);
-  --nvs-alert-icon-size: 1rem;
-  --nvs-alert-close-icon-size: 1rem;
-
-  --nvs-avatar-size-small: 1.5rem;
-  --nvs-avatar-size-medium: 2.25rem;
-  --nvs-avatar-size-large: 3rem;
-
-  --nvs-feedback-state-padding: var(--nvs-space-8);
-  --nvs-feedback-state-min-height: 13.5625rem;
-  --nvs-feedback-state-icon-container-size: 3rem;
-  --nvs-feedback-state-icon-size: 1.25rem;
-  --nvs-feedback-state-spinner-size: 2.5rem;
-  --nvs-feedback-state-spinner-width: 2px;
-
-  --nvs-touch-target-min: 2.75rem;
-
-  --nvs-icon-size-xs: 0.75rem;
-  --nvs-icon-size-small: 1rem;
-  --nvs-icon-size-medium: 1.25rem;
-  --nvs-icon-size-large: 1.5rem;
+  --nvs-icon-size-xs: 0.75rem; // 12px
+  --nvs-icon-size-small: 1rem; // 16px
+  --nvs-icon-size-medium: 1.25rem; // 20px
+  --nvs-icon-size-large: 1.5rem; // 24px
 }

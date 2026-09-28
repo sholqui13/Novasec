@@ -1,15 +1,22 @@
-@use '../../../../styles/mixins/button';
+@use 'mixins/button';
+@use 'mixins/typography' as type;
+@use 'functions' as *;
+
+$max-width: calculate-rem(384px);
+$accent-width: calculate-rem(4px);
+$icon-container-size: calculate-rem(36px);
+$icon-size: calculate-rem(18px);
 
 .nvs-toast {
   position: relative;
   display: flex;
   align-items: flex-start;
-  gap: var(--nvs-toast-gap);
+  gap: var(--nvs-space-4);
   width: 100%;
-  max-width: var(--nvs-toast-max-width);
-  padding: var(--nvs-toast-padding);
+  max-width: $max-width;
+  padding: var(--nvs-space-4);
   border: var(--nvs-border-width-default) solid var(--nvs-toast-accent);
-  border-left-width: var(--nvs-toast-accent-width);
+  border-left-width: $accent-width;
   border-radius: var(--nvs-radius-lg);
   background: var(--nvs-color-toast-background);
   box-shadow: var(--nvs-shadow-md);
@@ -48,15 +55,15 @@
   flex: none;
   align-items: center;
   justify-content: center;
-  width: var(--nvs-toast-icon-container-size);
-  height: var(--nvs-toast-icon-container-size);
+  width: $icon-container-size;
+  height: $icon-container-size;
   border-radius: var(--nvs-radius-full);
   color: var(--nvs-color-toast-icon);
   background: var(--nvs-toast-accent);
 }
 
 .nvs-toast__glyph {
-  --nvs-icon-size: var(--nvs-toast-icon-size);
+  --nvs-icon-size: #{$icon-size};
 }
 
 .nvs-toast__content {
@@ -68,7 +75,7 @@
 .nvs-toast__title {
   margin: 0;
   color: var(--nvs-color-toast-title);
-  font-size: var(--nvs-toast-title-font-size);
+  font-size: var(--nvs-font-size-body);
   font-weight: var(--nvs-font-weight-medium);
   line-height: var(--nvs-line-height-normal);
 }
@@ -76,8 +83,7 @@
 .nvs-toast__message {
   margin: var(--nvs-space-2) 0 0;
   color: var(--nvs-color-toast-message);
-  font-size: var(--nvs-toast-message-font-size);
-  line-height: var(--nvs-line-height-relaxed);
+  @include type.small;
 }
 
 .nvs-toast__close {
@@ -99,12 +105,12 @@
 }
 
 .nvs-toast__close-icon {
-  --nvs-icon-size: var(--nvs-toast-close-icon-size);
+  --nvs-icon-size: var(--nvs-icon-size-small);
 }
 
 @keyframes nvs-toast-enter {
   from {
     opacity: 0;
-    transform: translateY(-0.5rem);
+    transform: translateY(calculate-rem(-8px));
   }
 }
