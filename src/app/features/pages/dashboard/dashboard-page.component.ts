@@ -1,25 +1,33 @@
-import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { CasePanelComponent } from '@features/cases/components/case-panel';
 import { CasesMapComponent } from '@features/cases/components/cases-map';
 import type { Case } from '@features/cases/models';
 import { CasesService } from '@features/cases/services';
-import { ToastService } from '@shared/ui/toast';
+import { AlertComponent } from '@shared/ui/alert';
+import { ButtonComponent } from '@shared/ui/button';
+import { FeedbackStateComponent } from '@shared/ui/feedback-state';
+import { SkeletonComponent } from '@shared/ui/skeleton';
 
 @Component({
   selector: 'nvs-dashboard-page',
-  imports: [DatePipe, CasePanelComponent, CasesMapComponent],
+  imports: [
+    AlertComponent,
+    ButtonComponent,
+    CasePanelComponent,
+    CasesMapComponent,
+    FeedbackStateComponent,
+    SkeletonComponent,
+  ],
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardPageComponent {
   protected readonly cases = inject(CasesService);
-  private readonly toast = inject(ToastService);
-
-  protected readonly mapImageUrl = 'assets/images/map/campus-map.jpg';
+  private readonly router = inject(Router);
 
   protected viewDetails(item: Case): void {
-    this.toast.info('Próximamente', `El detalle del caso #${item.number} está en construcción.`);
+    void this.router.navigate(['/cases', item.number]);
   }
 }

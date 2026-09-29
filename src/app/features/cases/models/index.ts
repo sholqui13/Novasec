@@ -1,1 +1,1 @@
-export type { Case, CaseAssignee, CasePriority, MapPosition } from './case.model';
+export type { Case, CaseAssignee, CaseNotice, CasePriority, MapPosition } from './case.model';

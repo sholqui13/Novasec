@@ -1,0 +1,33 @@
+// Quien lo usa define el tamaño (width y height) desde su propio SCSS.
+:host {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--nvs-radius-md);
+  background: var(--nvs-color-skeleton);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, var(--nvs-color-skeleton-shine), transparent);
+    transform: translateX(-100%);
+    animation: nvs-skeleton-shine var(--nvs-motion-shimmer-duration) ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      animation: none;
+    }
+  }
+}
+
+:host(.nvs-skeleton--subtle) {
+  background: var(--nvs-color-skeleton-subtle);
+}
+
+@keyframes nvs-skeleton-shine {
+  to {
+    transform: translateX(100%);
+  }
+}

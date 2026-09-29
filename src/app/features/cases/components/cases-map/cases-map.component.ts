@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import {
   afterNextRender,
   ApplicationRef,
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   type ComponentRef,
@@ -42,9 +44,23 @@ function loadImageSize(url: string): Promise<{ width: number; height: number }> 
   });
 }
 
+export const CAMPUS_MAP_IMAGE = 'assets/images/map/campus-map.jpg';
+
 @Component({
   selector: 'nvs-cases-map',
-  template: `<div #container class="nvs-cases-map__container"></div>`,
+  imports: [DatePipe],
+  template: `
+    <div #container class="nvs-cases-map__container"></div>
+    @if (summary()) {
+      <p class="nvs-cases-map__summary">
+        <span class="nvs-cases-map__summary-dot" aria-hidden="true"></span>
+        <span>{{ cases().length }} casos activos</span>
+        @if (lastUpdated(); as updated) {
+          <span class="nvs-cases-map__updated">Actualizado {{ updated | date: 'HH:mm' }}</span>
+        }
+      </p>
+    }
+  `,
   styleUrl: './cases-map.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   // Los marcadores viven dentro de elementos que crea Leaflet.
@@ -52,9 +68,11 @@ function loadImageSize(url: string): Promise<{ width: number; height: number }> 
   host: { class: 'nvs-cases-map' },
 })
 export class CasesMapComponent {
-  readonly imageUrl = input.required<string>();
+  readonly imageUrl = input(CAMPUS_MAP_IMAGE);
   readonly cases = input<readonly Case[]>([]);
   readonly selectedId = input<string | null>(null);
+  readonly summary = input(false, { transform: booleanAttribute });
+  readonly lastUpdated = input<Date | null>(null);
   readonly selected = output<Case>();
 
   private readonly container = viewChild.required<ElementRef<HTMLElement>>('container');
@@ -67,6 +85,8 @@ export class CasesMapComponent {
   private readonly markers = new Map<string, MarkerEntry>();
   private readonly ready = signal(false);
   private destroyed = false;
+  // `undefined` hasta la primera sincronización: el primer encuadre no se anima.
+  private focusedId: string | null | undefined;
 
   constructor() {
     afterNextRender(() => void this.initMap());
@@ -162,6 +182,12 @@ export class CasesMapComponent {
       entry.component.setInput('state', item.id === selectedId ? 'selected' : 'default');
       entry.marker.setZIndexOffset(item.id === selectedId ? 1000 : 0);
     }
+
+    const selectedCase = cases.find((item) => item.id === selectedId);
+    if (selectedCase && selectedId !== this.focusedId) {
+      map.panTo(this.toLatLng(selectedCase.mapPosition), { animate: this.focusedId !== undefined });
+    }
+    this.focusedId = selectedId;
   }
 
   private addMarker(leaflet: typeof Leaflet, map: Leaflet.Map, item: MappedCase): MarkerEntry {

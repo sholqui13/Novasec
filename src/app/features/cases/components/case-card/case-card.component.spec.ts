@@ -67,6 +67,14 @@ describe('CaseCardComponent', () => {
     expect(host.querySelector('.nvs-case-card__assignee')).toBeNull();
   });
 
+  it('renders the title without a button when it is not interactive', () => {
+    fixture.componentRef.setInput('interactive', false);
+    fixture.detectChanges();
+
+    expect(trigger()).toBeNull();
+    expect(host.querySelector('h3')?.textContent?.trim()).toBe(CASE.title);
+  });
+
   it('emits selected on the first click', () => {
     expect(trigger().getAttribute('aria-pressed')).toBe('false');
 

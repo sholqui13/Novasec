@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { CasesApi } from './cases.api';
-import { FAKE_CASES, FAKE_CASES_DELAY, FakeCasesApi } from './fake-cases.api';
+import { FAKE_CASES, FAKE_CASES_DELAY, FAKE_CASES_ERROR_KEY, FakeCasesApi } from './fake-cases.api';
 
 describe('FakeCasesApi', () => {
   beforeEach(() => {
@@ -9,6 +9,17 @@ describe('FakeCasesApi', () => {
 
   afterEach(() => {
     vi.useRealTimers();
+    localStorage.removeItem(FAKE_CASES_ERROR_KEY);
+  });
+
+  it('can simulate a connection error', async () => {
+    localStorage.setItem(FAKE_CASES_ERROR_KEY, '1');
+    const cases = TestBed.inject(CasesApi).getCases();
+    const assertion = expect(cases).rejects.toThrow('Simulated connection error');
+
+    await vi.advanceTimersByTimeAsync(FAKE_CASES_DELAY);
+
+    await assertion;
   });
 
   it('is the default CasesApi implementation', () => {

@@ -23,6 +23,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/pages/dashboard').then((m) => m.DashboardPageComponent),
       },
+      {
+        path: 'cases/:id',
+        title: 'Detalle del caso · Novasec',
+        data: { pageTitle: 'Detalle del caso' },
+        loadComponent: () =>
+          import('./features/cases/pages/case-detail').then((m) => m.CaseDetailPageComponent),
+      },
     ],
   },
   ...(isDevMode()

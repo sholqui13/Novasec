@@ -1,31 +1,72 @@
-<div class="dashboard">
-  <section class="dashboard__map" aria-label="Mapa de casos activos">
+@if (cases.loading()) {
+  <div class="dashboard" aria-busy="true">
+    <p class="dashboard__sr-only" role="status">Cargando casos…</p>
+
+    <div class="dashboard__map dashboard-skeleton__card">
+      <nvs-skeleton class="dashboard-skeleton__title" />
+      <nvs-skeleton class="dashboard-skeleton__canvas" tone="subtle" />
+    </div>
+
+    <div class="dashboard__panel dashboard-skeleton__panel">
+      <nvs-skeleton class="dashboard-skeleton__line dashboard-skeleton__line--short" />
+      <nvs-skeleton class="dashboard-skeleton__line dashboard-skeleton__line--heading" />
+      <nvs-skeleton class="dashboard-skeleton__block" />
+      <nvs-skeleton class="dashboard-skeleton__line dashboard-skeleton__line--medium" />
+      <nvs-skeleton class="dashboard-skeleton__line" />
+      <nvs-skeleton class="dashboard-skeleton__line" />
+      <nvs-skeleton class="dashboard-skeleton__line dashboard-skeleton__line--half" />
+    </div>
+  </div>
+} @else if (cases.error()) {
+  <div class="dashboard">
+    <div class="dashboard__map dashboard-error__map">
+      <nvs-feedback-state
+        class="dashboard-error__state"
+        state="error"
+        title="No se pudo cargar"
+        message="Error de conexión"
+        actionLabel="Reintentar"
+        (action)="cases.load()"
+      />
+    </div>
+
+    <aside class="dashboard__panel dashboard-error__panel" aria-label="Detalle del caso">
+      <nvs-alert
+        type="error"
+        title="No pudimos cargar los casos"
+        message="Ocurrió un error al recuperar la información operativa."
+      />
+      <p class="dashboard-error__hint">
+        Tus filtros y selección se conservarán. Puedes volver a solicitar los datos sin salir del
+        Dashboard.
+      </p>
+      <button nvsButton class="dashboard-error__retry" (clicked)="cases.load()">Reintentar</button>
+    </aside>
+  </div>
+} @else {
+  <div class="dashboard">
     <nvs-cases-map
-      class="dashboard__map-canvas"
-      [imageUrl]="mapImageUrl"
+      class="dashboard__map"
+      role="region"
+      aria-label="Mapa de casos activos"
+      summary
       [cases]="cases.activeCases()"
       [selectedId]="cases.selectedCase()?.id ?? null"
+      [lastUpdated]="cases.lastUpdated()"
       (selected)="cases.select($event.id)"
     />
 
-    <p class="dashboard__chip dashboard__chip--status">
-      <span class="dashboard__status-dot" aria-hidden="true"></span>
-      <span>{{ cases.activeCases().length }} casos activos</span>
-      @if (cases.lastUpdated(); as updated) {
-        <span class="dashboard__updated">Actualizado {{ updated | date: 'HH:mm' }}</span>
-      }
-    </p>
-  </section>
-
-  <aside class="dashboard__panel" aria-label="Detalle del caso">
-    <nvs-case-panel
-      [case]="cases.selectedCase()"
-      [loading]="cases.loading()"
-      [error]="cases.error()"
-      emptyTitle="Selecciona un caso"
-      emptyMessage="Haz clic en un marcador del mapa"
-      (retry)="cases.load()"
-      (viewDetails)="viewDetails($event)"
-    />
-  </aside>
-</div>
+    <aside
+      class="dashboard__panel"
+      [class.dashboard__panel--empty]="!cases.selectedCase()"
+      aria-label="Detalle del caso"
+    >
+      <nvs-case-panel
+        [case]="cases.selectedCase()"
+        emptyTitle="Selecciona un caso"
+        emptyMessage="Haz clic en un marcador del mapa"
+        (viewDetails)="viewDetails($event)"
+      />
+    </aside>
+  </div>
+}

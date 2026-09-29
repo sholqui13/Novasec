@@ -35,18 +35,26 @@ export class LoginPageComponent {
   protected readonly loading = signal(false);
   protected readonly submitted = signal(false);
   protected readonly authError = signal('');
+  private readonly invalidCredentials = signal(false);
 
   private readonly formValue = toSignal(this.form.valueChanges);
 
-  protected readonly usernameError = computed(() =>
-    this.requiredError('username', 'Ingresa tu usuario.'),
+  protected readonly usernameError = computed(
+    () =>
+      this.requiredError('username', 'Ingresa tu usuario.') ||
+      (this.invalidCredentials() ? 'Usuario no reconocido.' : ''),
   );
-  protected readonly passwordError = computed(() =>
-    this.requiredError('password', 'Ingresa tu contraseña.'),
+  protected readonly passwordError = computed(
+    () =>
+      this.requiredError('password', 'Ingresa tu contraseña.') ||
+      (this.invalidCredentials() ? 'Revisa tus credenciales.' : ''),
   );
 
   constructor() {
-    this.form.valueChanges.subscribe(() => this.authError.set(''));
+    this.form.valueChanges.subscribe(() => {
+      this.authError.set('');
+      this.invalidCredentials.set(false);
+    });
   }
 
   protected async submit(): Promise<void> {
@@ -61,10 +69,10 @@ export class LoginPageComponent {
       await this.auth.login(this.form.getRawValue());
       await this.router.navigateByUrl(this.returnUrl());
     } catch (error) {
+      const invalidCredentials = error instanceof InvalidCredentialsError;
+      this.invalidCredentials.set(invalidCredentials);
       this.authError.set(
-        error instanceof InvalidCredentialsError
-          ? INVALID_CREDENTIALS_MESSAGE
-          : UNEXPECTED_ERROR_MESSAGE,
+        invalidCredentials ? INVALID_CREDENTIALS_MESSAGE : UNEXPECTED_ERROR_MESSAGE,
       );
     } finally {
       this.form.enable({ emitEvent: false });

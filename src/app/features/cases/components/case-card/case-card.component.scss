@@ -22,7 +22,7 @@
   font-family: var(--nvs-font-family-sans);
   @include button.interactive-transition;
 
-  &:hover {
+  &:has(.nvs-case-card__trigger):hover {
     border-color: var(--nvs-color-case-card-border-hover);
     box-shadow: var(--nvs-shadow-sm);
   }

@@ -28,6 +28,7 @@ export class CaseCardComponent {
   readonly caseData = input.required<Case>({ alias: 'case' });
   readonly density = input<CaseCardDensity>('comfortable');
   readonly active = input(false, { transform: booleanAttribute });
+  readonly interactive = input(true, { transform: booleanAttribute });
 
   readonly selected = output<Case>();
   readonly viewDetails = output<Case>();

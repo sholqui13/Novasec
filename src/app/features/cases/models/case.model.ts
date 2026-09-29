@@ -8,6 +8,11 @@ export interface MapPosition {
   readonly y: number;
 }
 
+export interface CaseNotice {
+  readonly title: string;
+  readonly message: string;
+}
+
 export interface CaseAssignee {
   readonly id: string;
   readonly name: string;
@@ -18,7 +23,9 @@ export interface Case {
   readonly id: string;
   readonly number: number;
   readonly title: string;
+  readonly category?: string;
   readonly description: string;
+  readonly notice?: CaseNotice;
   readonly status: CaseStatus;
   readonly priority: CasePriority;
   readonly location: string;

@@ -1,0 +1,11 @@
+:root {
+  --nvs-color-skeleton: var(--nvs-neutral-200);
+  --nvs-color-skeleton-subtle: var(--nvs-neutral-100);
+  --nvs-color-skeleton-shine: color-mix(in srgb, var(--nvs-neutral-0) 60%, transparent);
+}
+
+:root[data-theme='dark'] {
+  --nvs-color-skeleton: var(--nvs-neutral-700);
+  --nvs-color-skeleton-subtle: var(--nvs-neutral-800);
+  --nvs-color-skeleton-shine: color-mix(in srgb, var(--nvs-neutral-0) 8%, transparent);
+}

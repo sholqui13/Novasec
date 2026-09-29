@@ -108,4 +108,38 @@ describe('LoginPageComponent', () => {
     fixture.detectChanges();
     expect(host.querySelector('nvs-alert')).toBeNull();
   });
+
+  it('marks both fields as invalid for wrong credentials until the user types again', async () => {
+    await setup();
+    login.mockRejectedValue(new InvalidCredentialsError());
+    const [username, password] = inputs();
+    type(username, 'm.alvarez');
+    type(password, 'wrong');
+
+    await submit();
+
+    const fields = Array.from(host.querySelectorAll('nvs-input'));
+    expect(fields.every((field) => field.classList.contains('nvs-input--invalid'))).toBe(true);
+    expect(host.textContent).toContain('Usuario no reconocido.');
+    expect(host.textContent).toContain('Revisa tus credenciales.');
+    expect(username.getAttribute('aria-invalid')).toBe('true');
+
+    type(username, 'm.alvarez2');
+    fixture.detectChanges();
+
+    expect(fields.some((field) => field.classList.contains('nvs-input--invalid'))).toBe(false);
+  });
+
+  it('does not mark the fields for unexpected errors', async () => {
+    await setup();
+    login.mockRejectedValue(new Error('offline'));
+    const [username, password] = inputs();
+    type(username, 'm.alvarez');
+    type(password, 'novasec123');
+
+    await submit();
+
+    expect(host.querySelector('nvs-alert')?.textContent).toContain('error inesperado');
+    expect(host.querySelector('.nvs-input--invalid')).toBeNull();
+  });
 });

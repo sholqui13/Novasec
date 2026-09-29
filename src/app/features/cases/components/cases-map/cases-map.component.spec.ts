@@ -85,6 +85,18 @@ describe('CasesMapComponent', () => {
     expect(selected).toHaveBeenCalledWith(mappedCases[0]);
   });
 
+  it('shows the active cases summary only when requested', () => {
+    expect(host.querySelector('.nvs-cases-map__summary')).toBeNull();
+
+    fixture.componentRef.setInput('summary', true);
+    fixture.componentRef.setInput('lastUpdated', new Date('2026-09-26T03:18:00'));
+    fixture.detectChanges();
+
+    const summary = host.querySelector('.nvs-cases-map__summary')?.textContent;
+    expect(summary).toContain(`${FAKE_CASES.length} casos activos`);
+    expect(summary).toContain('Actualizado 03:18');
+  });
+
   it('removes the markers of cases that are no longer listed', async () => {
     await vi.waitFor(() => expect(markers()).toHaveLength(mappedCases.length));
 

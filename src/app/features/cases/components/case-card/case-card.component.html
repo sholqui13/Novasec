@@ -6,14 +6,18 @@
 </div>
 
 <h3 class="nvs-case-card__title">
-  <button
-    type="button"
-    class="nvs-case-card__trigger"
-    [attr.aria-pressed]="active()"
-    (click)="activate()"
-  >
+  @if (interactive()) {
+    <button
+      type="button"
+      class="nvs-case-card__trigger"
+      [attr.aria-pressed]="active()"
+      (click)="activate()"
+    >
+      {{ item.title }}
+    </button>
+  } @else {
     {{ item.title }}
-  </button>
+  }
 </h3>
 
 @if (density() === 'comfortable') {

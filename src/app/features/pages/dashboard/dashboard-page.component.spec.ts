@@ -1,9 +1,9 @@
-import { Component, computed, input, output, signal } from '@angular/core';
+import { booleanAttribute, Component, computed, input, output, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter, Router } from '@angular/router';
 import { CasesMapComponent } from '@features/cases/components/cases-map';
 import type { Case } from '@features/cases/models';
 import { CasesService, FAKE_CASES } from '@features/cases/services';
-import { ToastService } from '@shared/ui/toast';
 import { DashboardPageComponent } from './dashboard-page.component';
 
 @Component({ selector: 'nvs-cases-map', template: '' })
@@ -11,6 +11,8 @@ class CasesMapStubComponent {
   readonly imageUrl = input('');
   readonly cases = input<readonly Case[]>([]);
   readonly selectedId = input<string | null>(null);
+  readonly summary = input(false, { transform: booleanAttribute });
+  readonly lastUpdated = input<Date | null>(null);
   readonly selected = output<Case>();
 }
 
@@ -43,8 +45,8 @@ describe('DashboardPageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DashboardPageComponent],
       providers: [
+        provideRouter([]),
         { provide: CasesService, useValue: casesStub },
-        { provide: ToastService, useValue: { info: vi.fn() } },
       ],
     })
       .overrideComponent(DashboardPageComponent, {
@@ -63,17 +65,11 @@ describe('DashboardPageComponent', () => {
       .componentInstance as CasesMapStubComponent;
   }
 
-  it('passes the campus image and the active cases to the map', () => {
-    expect(map().imageUrl()).toBe('assets/images/map/campus-map.jpg');
+  it('passes the active cases and the last update to the map', () => {
+    expect(map().summary()).toBe(true);
+    expect(map().lastUpdated()).toEqual(new Date('2026-09-26T03:18:00'));
     expect(map().cases()).toHaveLength(3);
     expect(map().selectedId()).toBeNull();
-  });
-
-  it('shows the active count and the last update time', () => {
-    const status = host.querySelector('.dashboard__chip--status')?.textContent;
-
-    expect(status).toContain('3 casos activos');
-    expect(status).toContain('Actualizado 03:18');
   });
 
   it('shows the empty panel until a case is selected', () => {
@@ -92,12 +88,53 @@ describe('DashboardPageComponent', () => {
     expect(host.querySelector('nvs-case-panel h2')?.textContent).toBe('Caso #1038');
   });
 
-  it('retries loading from the error state', () => {
+  it('opens the case detail from the panel', () => {
+    const navigate = vi.spyOn(TestBed.inject(Router), 'navigate').mockResolvedValue(true);
+    selectedId.set('c-1042');
+    fixture.detectChanges();
+
+    (host.querySelector('.nvs-case-panel__action') as HTMLButtonElement).click();
+
+    expect(navigate).toHaveBeenCalledWith(['/cases', 1042]);
+  });
+
+  it('shows the skeleton instead of the map and panel while loading', () => {
+    loading.set(true);
+    fixture.detectChanges();
+
+    expect(host.querySelector('.dashboard')?.getAttribute('aria-busy')).toBe('true');
+    expect(host.querySelector('[role="status"]')?.textContent).toContain('Cargando casos');
+    expect(host.querySelectorAll('nvs-skeleton').length).toBeGreaterThan(0);
+    expect(host.querySelector('nvs-cases-map')).toBeNull();
+    expect(host.querySelector('nvs-case-panel')).toBeNull();
+
+    loading.set(false);
+    fixture.detectChanges();
+
+    expect(host.querySelector('nvs-skeleton')).toBeNull();
+    expect(host.querySelector('nvs-cases-map')).toBeTruthy();
+  });
+
+  it('shows the error state in the map area and in the panel', () => {
+    error.set(true);
+    fixture.detectChanges();
+
+    expect(host.querySelector('nvs-cases-map')).toBeNull();
+    expect(host.querySelector('.dashboard-error__map nvs-feedback-state')?.classList).toContain(
+      'nvs-feedback-state--error',
+    );
+    expect(host.querySelector('.dashboard-error__panel nvs-alert')?.textContent).toContain(
+      'No pudimos cargar los casos',
+    );
+  });
+
+  it('retries loading from both error actions', () => {
     error.set(true);
     fixture.detectChanges();
 
     (host.querySelector('.nvs-feedback-state__action') as HTMLButtonElement).click();
+    (host.querySelector('.dashboard-error__retry') as HTMLButtonElement).click();
 
-    expect(load).toHaveBeenCalledOnce();
+    expect(load).toHaveBeenCalledTimes(2);
   });
 });

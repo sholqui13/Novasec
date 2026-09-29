@@ -1,0 +1,62 @@
+<div class="case-detail">
+  <nvs-breadcrumb [items]="breadcrumb()" />
+
+  @if (caseData(); as item) {
+    <header class="case-detail__header">
+      <p class="case-detail__eyebrow">
+        {{ 'Caso #' + item.number + (item.category ? ' · ' + item.category : '') }}
+      </p>
+      <h2 class="case-detail__title">{{ item.title }}</h2>
+    </header>
+
+    <div class="case-detail__layout">
+      <div class="case-detail__main">
+        <nvs-case-card [case]="item" active [interactive]="false" />
+
+        <section class="case-detail__card" aria-labelledby="case-detail-description">
+          <h3 class="case-detail__card-title" id="case-detail-description">
+            <nvs-icon name="alert-circle" size="medium" />
+            Descripción del incidente
+          </h3>
+          <p class="case-detail__description">{{ item.description }}</p>
+
+          @if (item.notice; as notice) {
+            <nvs-alert type="warning" [title]="notice.title" [message]="notice.message" />
+          }
+        </section>
+
+        <section class="case-detail__location" aria-labelledby="case-detail-location">
+          <h3 class="case-detail__section-title" id="case-detail-location">Ubicación del incidente</h3>
+          <nvs-cases-map
+            class="case-detail__map"
+            summary
+            [cases]="mapCases()"
+            [selectedId]="item.id"
+            [lastUpdated]="cases.lastUpdated()"
+            (selected)="openCase($event)"
+          />
+        </section>
+      </div>
+
+      <nvs-case-information class="case-detail__information" [case]="item" />
+    </div>
+  } @else if (cases.loading()) {
+    <nvs-feedback-state state="loading" title="Cargando caso..." message="Obteniendo datos del servidor" />
+  } @else if (cases.error()) {
+    <nvs-feedback-state
+      state="error"
+      title="No se pudo cargar"
+      message="Error de conexión"
+      actionLabel="Reintentar"
+      (action)="cases.load()"
+    />
+  } @else {
+    <nvs-feedback-state
+      state="empty"
+      title="Caso no encontrado"
+      [message]="'El caso #' + id() + ' no existe o fue eliminado.'"
+      actionLabel="Volver al dashboard"
+      (action)="goToDashboard()"
+    />
+  }
+</div>
