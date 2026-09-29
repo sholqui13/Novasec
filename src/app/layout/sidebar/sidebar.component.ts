@@ -30,6 +30,7 @@ export class SidebarComponent {
   readonly theme = input<SidebarTheme>('dark');
   readonly collapsed = input(false, { transform: booleanAttribute });
   readonly drawer = input(false, { transform: booleanAttribute });
+  readonly searchTerm = input('');
 
   readonly toggle = output<void>();
   readonly search = output<string>();
@@ -41,11 +42,23 @@ export class SidebarComponent {
     this.toggleButton()?.nativeElement.focus();
   }
 
+  protected expandRail(): void {
+    if (this.collapsed()) {
+      this.toggle.emit();
+    }
+  }
+
   protected submitSearch(event: Event, query: string): void {
     event.preventDefault();
     const term = query.trim();
     if (term) {
       this.search.emit(term);
+    }
+  }
+
+  protected clearSearch(query: string): void {
+    if (!query.trim() && this.searchTerm()) {
+      this.search.emit('');
     }
   }
 }

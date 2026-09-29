@@ -23,10 +23,13 @@ describe('DashboardPageComponent', () => {
   const loading = signal(false);
   const error = signal(false);
   const activeCases = signal<readonly Case[]>([]);
+  const searchTerm = signal('');
   const load = vi.fn();
 
   const casesStub = {
     activeCases,
+    searchResults: activeCases,
+    searchTerm,
     loading,
     error,
     load,
@@ -40,6 +43,7 @@ describe('DashboardPageComponent', () => {
     loading.set(false);
     error.set(false);
     activeCases.set(FAKE_CASES.filter((item) => item.mapPosition));
+    searchTerm.set('');
     load.mockReset();
 
     await TestBed.configureTestingModule({
@@ -76,6 +80,21 @@ describe('DashboardPageComponent', () => {
     const empty = host.querySelector('nvs-case-panel nvs-feedback-state');
     expect(empty?.textContent).toContain('Selecciona un caso');
     expect(empty?.textContent).toContain('Haz clic en un marcador del mapa');
+  });
+
+  it('explains the search results in the empty panel', () => {
+    const empty = () => host.querySelector('nvs-case-panel nvs-feedback-state')?.textContent;
+
+    searchTerm.set('building');
+    activeCases.set(FAKE_CASES.slice(0, 2));
+    fixture.detectChanges();
+    expect(map().cases()).toHaveLength(2);
+    expect(empty()).toContain('2 casos coinciden con “building”.');
+
+    activeCases.set([]);
+    fixture.detectChanges();
+    expect(empty()).toContain('Sin resultados');
+    expect(empty()).toContain('Ningún caso activo coincide con “building”.');
   });
 
   it('selects the case chosen on the map and shows it in the panel', () => {

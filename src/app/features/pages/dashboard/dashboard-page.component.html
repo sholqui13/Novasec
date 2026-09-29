@@ -50,7 +50,7 @@
       role="region"
       aria-label="Mapa de casos activos"
       summary
-      [cases]="cases.activeCases()"
+      [cases]="cases.searchResults()"
       [selectedId]="cases.selectedCase()?.id ?? null"
       [lastUpdated]="cases.lastUpdated()"
       (selected)="cases.select($event.id)"
@@ -63,8 +63,8 @@
     >
       <nvs-case-panel
         [case]="cases.selectedCase()"
-        emptyTitle="Selecciona un caso"
-        emptyMessage="Haz clic en un marcador del mapa"
+        [emptyTitle]="emptyTitle()"
+        [emptyMessage]="emptyMessage()"
         (viewDetails)="viewDetails($event)"
       />
     </aside>

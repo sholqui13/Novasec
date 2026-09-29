@@ -41,8 +41,10 @@
       class="nvs-sidebar__search-input"
       type="search"
       name="q"
+      [value]="searchTerm()"
       placeholder="Search..."
       aria-label="Buscar casos"
+      (input)="clearSearch(query.value)"
     />
   </form>
 }
@@ -63,6 +65,7 @@
               [routerLinkActiveOptions]="{ exact: item.exact ?? false }"
               ariaCurrentWhenActive="page"
               [attr.title]="collapsed() ? item.label : null"
+              (click)="expandRail()"
             >
               <nvs-icon class="nvs-sidebar__icon" [name]="item.icon" size="small" />
               <span class="nvs-sidebar__label">{{ item.label }}</span>

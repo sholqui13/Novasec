@@ -17,6 +17,7 @@ describe('AppShellComponent', () => {
   const logout = vi.fn();
   const activeCases = signal<readonly Case[]>([]);
   const loadCases = vi.fn();
+  const setSearch = vi.fn();
 
   beforeAll(() => {
     const proto = HTMLDialogElement.prototype;
@@ -33,6 +34,7 @@ describe('AppShellComponent', () => {
     viewport.set('desktop');
     logout.mockReset();
     loadCases.mockReset();
+    setSearch.mockReset();
     activeCases.set([]);
 
     await TestBed.configureTestingModule({
@@ -45,7 +47,7 @@ describe('AppShellComponent', () => {
         ]),
         { provide: AuthService, useValue: { user: signal(null), logout } },
         { provide: BreakpointService, useValue: { viewport } },
-        { provide: CasesService, useValue: { activeCases, load: loadCases } },
+        { provide: CasesService, useValue: { activeCases, load: loadCases, searchTerm: signal(''), setSearch } },
       ],
     }).compileComponents();
 
@@ -167,6 +169,20 @@ describe('AppShellComponent', () => {
     fixture.detectChanges();
 
     expect(casesBadge()).toBe('3');
+  });
+
+  it('searches cases and shows the results on the dashboard', async () => {
+    const router = TestBed.inject(Router);
+    await router.navigateByUrl('/otra');
+    const navigate = vi.spyOn(router, 'navigateByUrl');
+    click('.nvs-sidebar__avatar-button');
+    const input = query<HTMLInputElement>('input[type="search"]');
+
+    input.value = 'parking';
+    query('form[role="search"]').dispatchEvent(new Event('submit', { cancelable: true }));
+
+    expect(setSearch).toHaveBeenCalledWith('parking');
+    expect(navigate).toHaveBeenCalledWith('/');
   });
 
   it('asks for confirmation before logging out', async () => {

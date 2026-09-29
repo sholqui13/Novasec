@@ -98,6 +98,21 @@ describe('SidebarComponent', () => {
     expect(toggled).toHaveBeenCalledOnce();
   });
 
+  it('expands the rail when clicking any navigation option, but not when expanded', () => {
+    const toggled = vi.fn<() => void>();
+    fixture.componentInstance.toggle.subscribe(toggled);
+    fixture.componentRef.setInput('collapsed', true);
+    fixture.detectChanges();
+
+    links()[1].click();
+    expect(toggled).toHaveBeenCalledOnce();
+
+    fixture.componentRef.setInput('collapsed', false);
+    fixture.detectChanges();
+    links()[1].click();
+    expect(toggled).toHaveBeenCalledOnce();
+  });
+
   it('labels the arrow as close when used as a drawer', () => {
     const arrow = () => host.querySelector('.nvs-sidebar__collapse') as HTMLButtonElement;
     expect(arrow().getAttribute('aria-label')).toBe('Contraer menú');
@@ -121,6 +136,23 @@ describe('SidebarComponent', () => {
     input.value = '  1042 ';
     form.dispatchEvent(new Event('submit', { cancelable: true }));
     expect(searched).toHaveBeenCalledWith('1042');
+  });
+
+  it('shows the active term and emits an empty search when the field is cleared', () => {
+    const searched = vi.fn<(term: string) => void>();
+    fixture.componentInstance.search.subscribe(searched);
+    fixture.componentRef.setInput('searchTerm', '1042');
+    fixture.detectChanges();
+    const input = host.querySelector('input[type="search"]') as HTMLInputElement;
+    expect(input.value).toBe('1042');
+
+    input.value = '10';
+    input.dispatchEvent(new Event('input'));
+    expect(searched).not.toHaveBeenCalled();
+
+    input.value = '';
+    input.dispatchEvent(new Event('input'));
+    expect(searched).toHaveBeenCalledWith('');
   });
 
   it('emits logout', () => {

@@ -69,14 +69,32 @@ describe('CasesService', () => {
     expect(service.selectedCase()).toBeNull();
   });
 
-  it('searches by number, title, location and assignee', async () => {
+  it('searches the active cases by number, title, location and assignee', async () => {
     await service.load();
-    const numbers = (term: string) => service.search(term).map((item) => item.number);
+    const numbers = (term: string) => {
+      service.setSearch(term);
+      return service.searchResults().map((item) => item.number);
+    };
 
-    expect(numbers('#1042')).toEqual([1042]);
+    expect(numbers('building')).toEqual([1042, 1043]);
     expect(numbers('parking')).toEqual([1038]);
-    expect(numbers('building')).toEqual([1042, 1043, 1036]);
-    expect(numbers('carlos')).toEqual([1041]);
-    expect(numbers('  ')).toHaveLength(FAKE_CASES.length);
+    expect(numbers('#1042')).toEqual([1042]);
+    expect(numbers('ana')).toEqual([1038]);
+    expect(numbers('carlos')).toEqual([]);
+    expect(numbers('  ')).toEqual(service.activeCases().map((item) => item.number));
+  });
+
+  it('selects the only result and clears a selection left out of the results', async () => {
+    await service.load();
+
+    service.setSearch('1038');
+    expect(service.selectedCase()?.number).toBe(1038);
+
+    service.setSearch('building');
+    expect(service.selectedCase()).toBeNull();
+
+    service.select('c-1042');
+    service.setSearch('');
+    expect(service.selectedCase()?.number).toBe(1042);
   });
 });

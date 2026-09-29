@@ -9,6 +9,7 @@
   [user]="user()"
   [collapsed]="!isMobile() && sidebarCollapsed()"
   [drawer]="isMobile()"
+  [searchTerm]="searchTerm()"
   (toggle)="toggleSidebar()"
   (search)="search($event)"
   (logout)="logoutModalOpen.set(true)"

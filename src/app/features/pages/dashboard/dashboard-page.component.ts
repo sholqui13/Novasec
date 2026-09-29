@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CasePanelComponent } from '@features/cases/components/case-panel';
 import { CasesMapComponent } from '@features/cases/components/cases-map';
@@ -26,6 +26,26 @@ import { SkeletonComponent } from '@shared/ui/skeleton';
 export class DashboardPageComponent {
   protected readonly cases = inject(CasesService);
   private readonly router = inject(Router);
+
+  private readonly noResults = computed(
+    () => !!this.cases.searchTerm() && this.cases.searchResults().length === 0,
+  );
+  protected readonly emptyTitle = computed(() =>
+    this.noResults() ? 'Sin resultados' : 'Selecciona un caso',
+  );
+  protected readonly emptyMessage = computed(() => {
+    const term = this.cases.searchTerm();
+    if (!term) {
+      return 'Haz clic en un marcador del mapa';
+    }
+    const count = this.cases.searchResults().length;
+    if (count === 0) {
+      return `Ningún caso activo coincide con “${term}”.`;
+    }
+    return count === 1
+      ? `1 caso coincide con “${term}”.`
+      : `${count} casos coinciden con “${term}”.`;
+  });
 
   protected viewDetails(item: Case): void {
     void this.router.navigate(['/cases', item.number]);

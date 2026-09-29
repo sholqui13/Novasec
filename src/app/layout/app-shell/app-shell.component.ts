@@ -12,7 +12,7 @@ import {
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map } from 'rxjs';
-import { AuthService, LOGIN_PATH } from '@core/auth';
+import { AuthService, HOME_PATH, LOGIN_PATH } from '@core/auth';
 import { BreakpointService, SystemStatusService } from '@core/services';
 import { CasesService } from '@features/cases/services';
 import { ModalComponent } from '@shared/ui/modal';
@@ -50,6 +50,7 @@ export class AppShellComponent {
     }));
   });
   protected readonly user = this.auth.user;
+  protected readonly searchTerm = this.cases.searchTerm;
   protected readonly systemStatus = inject(SystemStatusService).status;
   private readonly viewport = inject(BreakpointService).viewport;
   protected readonly isMobile = computed(() => this.viewport() === 'mobile');
@@ -105,8 +106,11 @@ export class AppShellComponent {
   }
 
   protected search(term: string): void {
-    // Pendiente: conectar con la búsqueda de casos cuando exista el servicio.
-    void term;
+    this.cases.setSearch(term);
+    if (term) {
+      this.closeMobileNav();
+      void this.router.navigateByUrl(HOME_PATH);
+    }
   }
 
   protected confirmLogout(): void {
