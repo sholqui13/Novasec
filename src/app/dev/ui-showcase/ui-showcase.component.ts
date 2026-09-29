@@ -6,17 +6,23 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { ICON_NAMES, IconComponent } from '../../shared/ui/icon';
-import { ButtonComponent } from '../../shared/ui/button';
-import { InputComponent } from '../../shared/ui/input';
-import { BadgeComponent } from '../../shared/ui/badge';
-import type { CaseStatus } from '../../core/models';
-import { CaseStatusBadgeComponent } from '../../shared/ui/case-status-badge';
-import { ModalComponent } from '../../shared/ui/modal';
-import { ToastComponent, ToastService, type ToastOptions } from '../../shared/ui/toast';
-import { AlertComponent, type AlertType } from '../../shared/ui/alert';
-import { AvatarComponent } from '../../shared/ui/avatar';
-import { FeedbackStateComponent } from '../../shared/ui/feedback-state';
+import { ICON_NAMES, IconComponent } from '@shared/ui/icon';
+import { ButtonComponent } from '@shared/ui/button';
+import { InputComponent } from '@shared/ui/input';
+import { BadgeComponent } from '@shared/ui/badge';
+import type { CaseStatus } from '@core/models';
+import { CaseStatusBadgeComponent } from '@shared/ui/case-status-badge';
+import { ModalComponent } from '@shared/ui/modal';
+import { ToastComponent, ToastService, type ToastOptions } from '@shared/ui/toast';
+import { AlertComponent, type AlertType } from '@shared/ui/alert';
+import { AvatarComponent } from '@shared/ui/avatar';
+import { FeedbackStateComponent } from '@shared/ui/feedback-state';
+import { CaseCardComponent } from '@features/cases/components/case-card';
+import { CasePanelComponent } from '@features/cases/components/case-panel';
+import { CaseInformationComponent } from '@features/cases/components/case-information';
+import { MapMarkerComponent } from '@features/cases/components/map-marker';
+import type { Case } from '@features/cases/models';
+import { FAKE_CASES } from '@features/cases/services';
 
 const CASE_REFERENCE = /^CASE-\d{4}-\d{4}$/;
 
@@ -34,6 +40,10 @@ const CASE_REFERENCE = /^CASE-\d{4}-\d{4}$/;
     AvatarComponent,
     IconComponent,
     FeedbackStateComponent,
+    CaseCardComponent,
+    CasePanelComponent,
+    CaseInformationComponent,
+    MapMarkerComponent,
   ],
   templateUrl: './ui-showcase.component.html',
   styleUrl: './ui-showcase.component.scss',
@@ -78,6 +88,14 @@ export class UiShowcaseComponent {
   protected readonly standardModalOpen = signal(false);
   protected readonly deleting = signal(false);
   protected readonly retrying = signal(false);
+  protected readonly selectedMarkerId = signal('1044');
+  protected readonly sampleCases: readonly Case[] = FAKE_CASES.slice(0, 3);
+  protected readonly activeCaseId = signal(this.sampleCases[0].id);
+  protected readonly casePanelStates = ['case', 'empty', 'loading', 'error'] as const;
+  protected readonly casePanelState = signal<(typeof this.casePanelStates)[number]>('case');
+  protected readonly activeCase = computed(
+    () => this.sampleCases.find((item) => item.id === this.activeCaseId()) ?? this.sampleCases[0],
+  );
   protected readonly caseStatuses: readonly CaseStatus[] = [
     'open',
     'in-progress',
@@ -114,6 +132,10 @@ export class UiShowcaseComponent {
 
   protected showToast({ type, title, message }: ToastOptions): void {
     this.toastService.show({ type, title, message });
+  }
+
+  protected viewCaseDetails(item: Case): void {
+    this.toastService.info('Ver detalle', `Abrir el caso #${item.number}`);
   }
 
   protected simulateRetry(): void {

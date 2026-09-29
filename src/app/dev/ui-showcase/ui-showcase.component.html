@@ -270,6 +270,86 @@
     </div>
   </section>
 
+  <h1 class="showcase__title">Case Cards</h1>
+  <p class="showcase__lead">
+    Un clic selecciona la tarjeta; un segundo clic sobre la seleccionada emite viewDetails.
+  </p>
+
+  <section class="showcase__section showcase__stack showcase__cases">
+    @for (item of sampleCases; track item.id) {
+      <nvs-case-card
+        [case]="item"
+        [active]="activeCaseId() === item.id"
+        (selected)="activeCaseId.set($event.id)"
+        (viewDetails)="viewCaseDetails($event)"
+      />
+    }
+    <nvs-case-card
+      density="compact"
+      [case]="sampleCases[0]"
+      [active]="activeCaseId() === 'compact'"
+      (selected)="activeCaseId.set('compact')"
+      (viewDetails)="viewCaseDetails($event)"
+    />
+  </section>
+
+  <h1 class="showcase__title">Case Panel</h1>
+  <p class="showcase__lead">
+    Muestra el caso seleccionado arriba en Case Cards. Los botones cambian entre los estados.
+  </p>
+
+  <section class="showcase__section">
+    <div class="showcase__row">
+      @for (state of casePanelStates; track state) {
+        <button
+          nvsButton
+          size="small"
+          [variant]="casePanelState() === state ? 'primary' : 'secondary'"
+          (clicked)="casePanelState.set(state)"
+        >
+          {{ state }}
+        </button>
+      }
+    </div>
+  </section>
+
+  <section class="showcase__section showcase__cases">
+    <nvs-case-panel
+      [case]="casePanelState() === 'case' ? activeCase() : null"
+      [loading]="casePanelState() === 'loading'"
+      [error]="casePanelState() === 'error'"
+      (viewDetails)="viewCaseDetails($event)"
+      (retry)="casePanelState.set('case')"
+    />
+  </section>
+
+  <h1 class="showcase__title">Case Information</h1>
+  <p class="showcase__lead">Muestra el caso seleccionado arriba en Case Cards.</p>
+
+  <section class="showcase__section showcase__cases">
+    <nvs-case-information [case]="activeCase()" />
+  </section>
+
+  <h1 class="showcase__title">Map Markers</h1>
+  <p class="showcase__lead">
+    Default, hover (fijo para la lámina; también aparece con el mouse o el foco), selected y cluster.
+    Clic en un marcador para seleccionarlo.
+  </p>
+
+  <section class="showcase__section showcase__map">
+    <nvs-map-marker caseId="1041" />
+    <nvs-map-marker caseId="1042" state="hover" />
+    <nvs-map-marker caseId="1043" state="selected" />
+    <nvs-map-marker [clusterCount]="7" />
+    @for (id of ['1044', '1045']; track id) {
+      <nvs-map-marker
+        [caseId]="id"
+        [state]="selectedMarkerId() === id ? 'selected' : 'default'"
+        (selected)="selectedMarkerId.set(id)"
+      />
+    }
+  </section>
+
   <h1 class="showcase__title">Feedback States</h1>
   <p class="showcase__lead">
     Loading, empty, and error states for async content regions. "Retry" simula una recarga de 1.5 s.
